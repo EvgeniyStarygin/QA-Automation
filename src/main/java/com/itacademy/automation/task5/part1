@@ -1,0 +1,86 @@
+1) Google search page DONE
+
+1.1 query input:
+xPath: //input[@type='text']
+CSS: input[type='text']
+
+1.2 "search in Google" button
+xPath: //div[contains(@class, 'FPdoLc')]//input[@name='btnK']
+CSS: div.FPdoLc input[name='btnK']
+
+1.3 "I am lucky!" button
+xPath: //div[contains(@class, 'FPdoLc')]//input[@name='btnI']
+CSS: div.FPdoLc input[name='btnI']
+
+1.4 Search for “nyan cat” and create a locator that returns ALL 10 result links
+xPath: //div[@id='rso']/div[not(contains(@class,'kno-kp'))]//div[@class='r']/a | //h3[@class='r H1u2de']/a
+CSS: div#rso > div:not([class*='kno-kp'])  h3.H1u2de > a, div#rso > div:not([class*='kno-kp'])  div.r > a
+
+
+1.5 n-th "o" letter in Goooooooooogle   (n = 1...10)
+xPath: //div[@id='foot']//td[not(contains(@class, 'b'))][n], где n = 1...10
+CSS: div#foot td:not([class*='b']):nth-child(n), где n = 2...11 (тк номер относительно родителя)
+
+
+2) Mail.ru main page DONE
+
+2.1 login input
+xPath: //input[@id='mailbox:login']
+CSS: input[id='mailbox:login']
+
+2.2 domain selection
+xPath: //select[@id='mailbox:domain']
+CSS: select[id='mailbox:domain']
+
+2.3 "Ввести пароль" button
+xPath: //label[@id='mailbox:submit']//input[@type='submit']
+CSS: label[id='mailbox:submit'] input[type='submit']
+
+2.4 password input
+xPath: //input[@id='mailbox:password']
+CSS: input[id='mailbox:password']
+
+2.5 "Войти" button
+xPath: //label[@id='mailbox:submit']//input[@type='submit']
+CSS: label[id='mailbox:submit'] input[type='submit']
+
+
+3) Mail.ru main page (logged in):
+
+3.1 links to folders (incoming, outcoming, spam, deleted, drafts)
+xPath: //div[contains(@class, 'nav-folders')]//a[n], где n = 1...5
+CSS: div.nav-folders a:nth-child(n), , где n = 1...5
+
+3.2 action buttons (write new letter, delete, mark as spam, mark as not spam, mark as read, move to another folder)
+* write new letter link
+xPath: //div[contains(@class, 'sidebar__header')]//a[@title='Написать письмо']
+CSS: div.sidebar__header a[title='Написать письмо']
+
+* header links
+xPath: //tr//span[contains(@class, 'button2__wrapper')]
+CSS: tr span.button2__wrapper
+
+3.3 Checkbox for one exact letter
+xPath: //span[contains(@class, 'll-av__checkbox')]//div[@class='checkbox']
+CSS:span.ll-av__checkbox div.checkbox
+
+3.4 Opening link for one exact letter
+xPath: //a[contains(@class, 'llc_normal')][n], где n = 1...количество писем
+CSS: a.llc_normal:nth-child(n), , где n = 4...количество писем+3
+
+3.5 New letter page: inputs for address, topic, text, file attach
+*input for address:
+xPath: //label[contains(@class, 'container--zU301')]//input[@type='text']
+CSS: label.container--zU301 input[type='text']
+
+* input for topic:
+xPath: //input[@name='Subject']
+CSS: input[name='Subject']
+
+* input for text:
+xPath: //div[@role='textbox']
+CSS: div[role='textbox']
+
+* input for file attach:
+xPath: //div[contains(@class, 'controls--adDt4')]//input[@type='file']
+CSS: div.controls--adDt4 input[type='file']
