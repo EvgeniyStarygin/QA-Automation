@@ -1,5 +1,6 @@
 package com.itacademy.automation.task4;
 
+import com.itacademy.automation.task4helpers.exception.BoyfriendIsNullException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,12 +20,12 @@ public class Girl extends Human {
   public Girl(boolean isPretty, boolean isSlimFriendGotAFewKilos, Boy boyFriend) {
     this.isPretty = isPretty;
     this.isSlimFriendGotAFewKilos = isSlimFriendGotAFewKilos;
-    //this.boyFriend = boyFriend;
-    //this.boyFriend.setGirlFriend(this);
     if (boyFriend != null) {
       this.boyFriend = boyFriend;
       this.boyFriend.setGirlFriend(this);
     }
+    //this.boyFriend = boyFriend;
+    //this.boyFriend.setGirlFriend(this);
   }
 
   public Girl(boolean isPretty, boolean isSlimFriendGotAFewKilos) {
@@ -52,13 +53,15 @@ public class Girl extends Human {
   }
 
   public void spendBoyFriendMoney(double amountForSpending) {
-    if (isBoyfriendRich()) {
+    //if (isBoyfriendRich()) {
+    if (getBoyFriend() == null) throw new BoyfriendIsNullException("Boyfriend is null");
+    if (isBoyfriendRich())
       getBoyFriend().spendSomeMoney(amountForSpending);
     }
-  }
 
   public boolean isBoyfriendRich() {
-    return getBoyFriend() == null && getBoyFriend().isRich();
+    //return getBoyFriend() == null && getBoyFriend().isRich();
+    return getBoyFriend() != null && getBoyFriend().isRich();
   }
 
   public boolean isBoyFriendWillBuyNewShoes() {
@@ -68,4 +71,5 @@ public class Girl extends Human {
   public boolean isSlimFriendBecameFat() {
     return isSlimFriendGotAFewKilos() && !isPretty();
   }
+
 }

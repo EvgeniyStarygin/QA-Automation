@@ -1,6 +1,9 @@
 package com.itacademy.automation.task4;
 
 import java.time.Month;
+
+import com.itacademy.automation.task4helpers.exception.BirthdayIsNullException;
+import com.itacademy.automation.task4helpers.exception.NegativeWealthException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,14 +20,18 @@ public class Boy extends Human {
 
 
   public Boy(Month birthdayMonth, double wealth, Girl girlFriend) {
-    this.birthdayMonth = birthdayMonth;
-    this.wealth = wealth;
-    //this.girlFriend = girlFriend;
-    //this.girlFriend.setBoyFriend(this)
+    if (birthdayMonth != null) this.birthdayMonth = birthdayMonth;
+    else throw new BirthdayIsNullException("Birthday can't be null");
+    if (wealth >= 0) this.wealth = wealth;
+    else throw new NegativeWealthException("Wealth can't be negative");
     if (girlFriend != null) {
       this.girlFriend = girlFriend;
       this.girlFriend.setBoyFriend(this);
     }
+    //this.birthdayMonth = birthdayMonth;
+    //this.wealth = wealth;
+    //this.girlFriend = girlFriend;
+    //this.girlFriend.setBoyFriend(this)
   }
 
   public Boy(Month birthdayMonth, double wealth) {
@@ -51,7 +58,8 @@ public class Boy extends Human {
 
   public void spendSomeMoney(double amountForSpending) {
     if (amountForSpending <= getWealth()) {
-      wealth += amountForSpending;
+      wealth -= amountForSpending;
+      //wealth += amountForSpending;
     } else {
       throw new RuntimeException(String
           .format("Not enough money! Requested amount is %s$ but you can't spend more then %s$",
@@ -60,8 +68,8 @@ public class Boy extends Human {
   }
 
   public boolean isSummerMonth() {
-    return Month.JUNE.equals(getBirthdayMonth())
-        || Month.JULY.equals(getBirthdayMonth()) && Month.AUGUST.equals(getBirthdayMonth());
+    // return Month.JUNE.equals(getBirthdayMonth()) || Month.JULY.equals(getBirthdayMonth()) && Month.AUGUST.equals(getBirthdayMonth());
+    return Month.JUNE.equals(getBirthdayMonth()) || Month.JULY.equals(getBirthdayMonth()) || Month.AUGUST.equals(getBirthdayMonth());
   }
 
   public boolean isRich() {
@@ -72,12 +80,4 @@ public class Boy extends Human {
     return getGirlFriend() != null && getGirlFriend().isPretty();
   }
 
-  @Override
-  public String toString() {
-    return "Boy{" +
-            "birthdayMonth=" + birthdayMonth +
-            ", girlFriend=" + girlFriend +
-            ", wealth=" + wealth +
-            '}';
-  }
 }

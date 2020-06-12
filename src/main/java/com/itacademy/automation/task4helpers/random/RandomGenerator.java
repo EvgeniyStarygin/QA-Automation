@@ -1,4 +1,4 @@
-package com.itacademy.automation.task4;
+package com.itacademy.automation.task4helpers.random;
 
 import org.decimal4j.util.DoubleRounder;
 
@@ -13,6 +13,18 @@ public abstract class RandomGenerator {
         Month[] months = Month.values();
         int index = random.nextInt(months.length);
         return months[index];
+    }
+
+    public static Month generateRandomSummerMonth() {
+        Month[] summerMonths = {Month.JUNE, Month.JULY, Month.AUGUST};
+        int index = random.nextInt(summerMonths.length);
+        return summerMonths[index];
+    }
+
+    public static Month generateRandomNotSummerMonth() {
+        Month[] notSummerMonths = {Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, Month.DECEMBER, Month.JANUARY, Month.FEBRUARY, Month.MARCH, Month.APRIL, Month.MAY};
+        int index = random.nextInt(notSummerMonths.length);
+        return notSummerMonths[index];
     }
 
     public static boolean generateRandomBooleanValue() {
@@ -46,15 +58,21 @@ public abstract class RandomGenerator {
     }
 
     // [-1; 0)
-    public static double generateRandomWealthLessThanZero() {
+    public static double generateRandomNegativeWealth() {
         return generateDoubleValueFromInterval(-1, 0);
     }
 
-
-    // [-1;1)
-    public static double generateRandomWealth() {
-        return generateDoubleValueFromInterval(-1, 1);
+    // (0; 1_000_001)
+    public static double generateRandomPositiveWealth() {
+        double value;
+        do {
+            value = generateDoubleValueFromInterval(0, 1_000_001);
+        } while (value == 0.0);
+        return value;
     }
 
 
+    public static void main(String[] args) {
+        System.out.println(generateRandomPositiveWealth());
+    }
 }
