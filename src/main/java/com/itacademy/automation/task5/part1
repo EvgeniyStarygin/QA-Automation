@@ -1,4 +1,4 @@
-1) Google search page DONE
+1) Google search page
 
 1.1 query input:
 xPath: //input[@type='text']
@@ -22,7 +22,7 @@ xPath: //div[@id='foot']//td[not(contains(@class, 'b'))][n], где n = 1...10
 CSS: div#foot td:not([class*='b']):nth-child(n), где n = 2...11 (тк номер относительно родителя)
 
 
-2) Mail.ru main page DONE
+2) Mail.ru main page
 
 2.1 login input
 xPath: //input[@id='mailbox:login']
@@ -48,17 +48,50 @@ CSS: label[id='mailbox:submit'] input[type='submit']
 3) Mail.ru main page (logged in):
 
 3.1 links to folders (incoming, outcoming, spam, deleted, drafts)
-xPath: //div[contains(@class, 'nav-folders')]//a[n], где n = 1...5
-CSS: div.nav-folders a:nth-child(n), , где n = 1...5
+* incoming:
+xPath: //a[@title='Входящие']
+CSS: a[title='Входящие']
+
+* outcoming:
+xPath: //a[@title='Отправленные']
+CSS: a[title='Отправленные']
+
+* spam:
+xPath: //a[@title='Спам']
+CSS: a[title='Спам']
+
+* deleted:
+xPath: //a[@title='Корзина']
+CSS: a[title='Корзина']
+
+* drafts:
+xPath: //a[@title='Черновики']
+CSS: a[title='Черновики']
 
 3.2 action buttons (write new letter, delete, mark as spam, mark as not spam, mark as read, move to another folder)
-* write new letter link
-xPath: //div[contains(@class, 'sidebar__header')]//a[@title='Написать письмо']
-CSS: div.sidebar__header a[title='Написать письмо']
+* write new letter
+xPath: //a[@title='Написать письмо']
+CSS: a[title='Написать письмо']
 
-* header links
-xPath: //tr//span[contains(@class, 'button2__wrapper')]
-CSS: tr span.button2__wrapper
+* delete
+xPath: //span[@title='Удалить']
+CSS: span[title='Удалить']
+
+* move to another folder
+xPath: //span[@title='В папку']
+CSS: span[title='В папку']
+
+* mark as spam
+xPath: //span[@title='Спам']
+CSS: span[title='Спам']
+
+* move to archive
+xPath: //span[@title='В архив']
+CSS: span[title='В архив']
+
+* select all
+xPath: //span[@title='Выделить все']
+CSS: span[title='Выделить все']
 
 3.3 Checkbox for one exact letter
 xPath: //span[contains(@class, 'll-av__checkbox')]//div[@class='checkbox']
@@ -69,7 +102,7 @@ xPath: //a[contains(@class, 'llc_normal')][n], где n = 1...количеств
 CSS: a.llc_normal:nth-child(n), , где n = 4...количество писем+3
 
 3.5 New letter page: inputs for address, topic, text, file attach
-*input for address:
+* input for address:
 xPath: //label[contains(@class, 'container--zU301')]//input[@type='text']
 CSS: label.container--zU301 input[type='text']
 
