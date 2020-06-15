@@ -1,5 +1,4 @@
 package com.itacademy.automation.task1;
 
-public class EngineeringCalculatorWithMemory extends EngineeringCalculator implements HasMemory{
-    
+public class EngineeringCalculatorWithMemory extends EngineeringCalculator implements HasMemory {
 }

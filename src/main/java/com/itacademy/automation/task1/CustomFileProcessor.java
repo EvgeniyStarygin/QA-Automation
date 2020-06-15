@@ -17,62 +17,30 @@ public class CustomFileProcessor {
     private String fileName;
     private Calculator calculator;
 
-
-
     public void readFile(Path path) throws IOException {
         list = Files.lines(path).collect(Collectors.toList());
     }
-
-    public Scanner getScanner() {
-        return scanner;
-    }
-
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
-    public void setCalculator(Calculator calculator) {
-        this.calculator = calculator;
-    }
-
     public Calculator getCalculator() {
         return calculator;
     }
     public String getPath() {
         return path;
     }
-
     public void setPath(String path) {
         this.path = path;
     }
-
     public List<String> getList() {
         return list;
     }
-
-    public void setList(List<String> list) {
-        this.list = list;
-    }
-
-    public void setExpression(StringBuilder expression) {
-        this.expression = expression;
-    }
-
     public String getFileName() {
         return fileName;
     }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
     public void setFileName() {
         System.out.println("Enter file name:");
         scanner = new Scanner(System.in);
         fileName = scanner.nextLine();
         scanner.close();
     }
-
     private String getExpression() {
         expression = new StringBuilder();
         for (int i = 1; i < list.size(); i++) {
@@ -80,13 +48,11 @@ public class CustomFileProcessor {
         }
         return expression.toString();
     }
-
     private void printFile() {
         System.out.println("File contains:");
         list.forEach(System.out::println);
         System.out.println();
     }
-
     private void printCalculatorType() {
         CalculatorType calculatorType;
         switch (list.get(0)) {
@@ -107,17 +73,14 @@ public class CustomFileProcessor {
         }
         System.out.println("Calculator Type: " + calculatorType);
     }
-
     private void printExpression() {
         System.out.println("Expression: " + getExpression());
     }
-
     public void printAll() {
         printFile();
         printCalculatorType();
         printExpression();
     }
-
     public Calculator initializeCalculator() {
         switch (list.get(0)) {
             case "1":
@@ -137,5 +100,4 @@ public class CustomFileProcessor {
         }
         return calculator;
     }
-
 }

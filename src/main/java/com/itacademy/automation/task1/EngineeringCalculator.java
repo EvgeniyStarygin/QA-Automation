@@ -3,10 +3,11 @@ package com.itacademy.automation.task1;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EngineeringCalculator extends SimpleCalculator {
 
-    private HashMap<String, Function> functionTable = getFunctionTable();
+    private Map<String, Function> functionTable = getFunctionTable();
 
     @Override
     public List<Lexeme> analyzeLexeme(List<String> list) {
@@ -58,39 +59,37 @@ public class EngineeringCalculator extends SimpleCalculator {
         lexemes.add(new Lexeme(LexemeType.EOF, ""));
         return lexemes;
     }
-
     @Override
     public double factor(LexemeBuffer lexemes) {
-        Lexeme lexeme = lexemes.next();
-        switch (lexeme.type) {
+        Lexeme lexeme = lexemes.getNext();
+        switch (lexeme.getType()) {
             case NAME:
-                lexemes.back();
+                lexemes.decreaseIndex();
                 return func(lexemes);
             case OP_MINUS:
                 double value = factor(lexemes);
                 return -value;
             case NUMBER:
-                return Double.parseDouble(lexeme.value);
+                return Double.parseDouble(lexeme.getValue());
             case LEFT_BRACKET:
                 value = plusminus(lexemes);
-                lexeme = lexemes.next();
-                if (lexeme.type != LexemeType.RIGHT_BRACKET) {
-                    throw new RuntimeException("Unexpected token: " + lexeme.value
+                lexeme = lexemes.getNext();
+                if (lexeme.getType() != LexemeType.RIGHT_BRACKET) {
+                    throw new RuntimeException("Unexpected token: " + lexeme.getValue()
                             + " at position: " + lexemes.getIndex());
                 }
                 return value;
             default:
-                throw new RuntimeException("Unexpected token: " + lexeme.value
+                throw new RuntimeException("Unexpected token: " + lexeme.getValue()
                         + " at position: " + lexemes.getIndex());
         }
     }
-
     @Override
     public double multdiv(LexemeBuffer lexemes) {
         double value = factor(lexemes);
         while (true) {
-            Lexeme lexeme = lexemes.next();
-            switch (lexeme.type) {
+            Lexeme lexeme = lexemes.getNext();
+            switch (lexeme.getType()) {
                 case OP_MUL:
                     value *= factor(lexemes);
                     break;
@@ -102,21 +101,20 @@ public class EngineeringCalculator extends SimpleCalculator {
                 case COMMA:
                 case OP_PLUS:
                 case OP_MINUS:
-                    lexemes.back();
+                    lexemes.decreaseIndex();
                     return value;
                 default:
-                    throw new RuntimeException("Unexpected token: " + lexeme.value
+                    throw new RuntimeException("Unexpected token: " + lexeme.getValue()
                             + " at position: " + lexemes.getIndex());
             }
         }
     }
-
     @Override
     public double plusminus(LexemeBuffer lexemes) {
         double value = multdiv(lexemes);
         while (true) {
-            Lexeme lexeme = lexemes.next();
-            switch (lexeme.type) {
+            Lexeme lexeme = lexemes.getNext();
+            switch (lexeme.getType()) {
                 case OP_PLUS:
                     value += multdiv(lexemes);
                     break;
@@ -128,45 +126,37 @@ public class EngineeringCalculator extends SimpleCalculator {
                 case COMMA:
                 case OP_MUL:
                 case OP_DIV:
-                    lexemes.back();
+                    lexemes.decreaseIndex();
                     return value;
                 default:
-                    throw new RuntimeException("Unexpected token: " + lexeme.value
+                    throw new RuntimeException("Unexpected token: " + lexeme.getValue()
                             + " at position: " + lexemes.getIndex());
             }
         }
     }
-
-
     @Override
     public double func(LexemeBuffer lexemeBuffer) {
-        String name = lexemeBuffer.next().value;
-        Lexeme lexeme = lexemeBuffer.next();
-
-        if (lexeme.type != LexemeType.LEFT_BRACKET) {
-            throw new RuntimeException("Wrong function call syntax at " + lexeme.value);
+        String name = lexemeBuffer.getNext().getValue();
+        Lexeme lexeme = lexemeBuffer.getNext();
+        if (lexeme.getType() != LexemeType.LEFT_BRACKET) {
+            throw new RuntimeException("Wrong function call syntax at " + lexeme.getValue());
         }
-
         ArrayList<Double> args = new ArrayList<>();
-
-        lexeme = lexemeBuffer.next();
-        if (lexeme.type != LexemeType.RIGHT_BRACKET) {
-            lexemeBuffer.back();
+        lexeme = lexemeBuffer.getNext();
+        if (lexeme.getType() != LexemeType.RIGHT_BRACKET) {
+            lexemeBuffer.decreaseIndex();
             do {
                 args.add(expr(lexemeBuffer));
-                lexeme = lexemeBuffer.next();
-
-                if (lexeme.type != LexemeType.COMMA && lexeme.type != LexemeType.RIGHT_BRACKET) {
-                    throw new RuntimeException("Wrong function call syntax at " + lexeme.value);
+                lexeme = lexemeBuffer.getNext();
+                if (lexeme.getType() != LexemeType.COMMA && lexeme.getType() != LexemeType.RIGHT_BRACKET) {
+                    throw new RuntimeException("Wrong function call syntax at " + lexeme.getValue());
                 }
-
-            } while (lexeme.type == LexemeType.COMMA);
+            } while (lexeme.getType() == LexemeType.COMMA);
         }
         return functionTable.get(name).apply(args);
     }
-
     @Override
-    public HashMap<String, Function> getFunctionTable() {
+    public Map<String, Function> getFunctionTable() {
         HashMap<String, Function> functionTable = new HashMap<>();
         functionTable.put("cos", args -> {
             if (args.size() != 1) {

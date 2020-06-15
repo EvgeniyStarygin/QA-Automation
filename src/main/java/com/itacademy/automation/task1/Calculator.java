@@ -2,6 +2,7 @@ package com.itacademy.automation.task1;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface Calculator {
     /*------------------------------------------------------------------
@@ -20,13 +21,11 @@ public interface Calculator {
 //
 //    func : NAME '(' (expr (',' expr)+)? ')'
 
-
     public List<Lexeme> analyzeLexeme(List<String> list);
     public double factor(LexemeBuffer lexemes);
     public double multdiv(LexemeBuffer lexemes);
     public double plusminus(LexemeBuffer lexemes);
     public double expr(LexemeBuffer lexemes);
     public double func(LexemeBuffer lexemeBuffer);
-    public HashMap<String, Function> getFunctionTable();
-
+    public Map<String, Function> getFunctionTable();
 }
