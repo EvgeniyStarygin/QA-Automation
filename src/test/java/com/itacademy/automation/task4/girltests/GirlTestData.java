@@ -1,9 +1,10 @@
-package com.itacademy.automation;
+package com.itacademy.automation.task4.girltests;
 
 import com.itacademy.automation.task4.Boy;
 import com.itacademy.automation.task4.Girl;
 import com.itacademy.automation.task4.Mood;
 import org.testng.annotations.DataProvider;
+
 import static com.itacademy.automation.task4helpers.random.RandomGenerator.*;
 import static org.testng.Assert.assertEquals;
 
@@ -19,7 +20,6 @@ public class GirlTestData {
                 {new Girl(false, false), false},
                 {new Girl(true, false), false},
                 {new Girl(true, true), false},
-
         };
     }
 
@@ -31,7 +31,6 @@ public class GirlTestData {
                 {new Girl(false, generateRandomBooleanValue(), new Boy(generateRandomMonth(), generateRandomWealthBetweenZeroAndMillion())), false},
                 {new Girl(false, generateRandomBooleanValue(), new Boy(generateRandomMonth(), generateRandomWealthMoreThanMillion())), false},
                 {new Girl(true), false},
-
         };
     }
 
@@ -41,10 +40,8 @@ public class GirlTestData {
                 {new Girl(), false},
                 {new Girl(generateRandomBooleanValue(), generateRandomBooleanValue(), new Boy(generateRandomMonth(), generateRandomWealthMoreThanMillion())), true},
                 {new Girl(generateRandomBooleanValue(), generateRandomBooleanValue(), new Boy(generateRandomMonth(), generateRandomWealthBetweenZeroAndMillion())), false},
-
         };
     }
-
 
     @DataProvider(name = "getMoodTest")
     public Object[][] getMoodTestData() {
@@ -57,5 +54,4 @@ public class GirlTestData {
                 {new Girl(false, false, new Boy(generateRandomMonth(), generateRandomWealthBetweenZeroAndMillion())), Mood.I_HATE_THEM_ALL},
         };
     }
-
 }

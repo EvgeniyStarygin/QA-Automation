@@ -1,4 +1,4 @@
-package com.itacademy.automation;
+package com.itacademy.automation.task4.boytests;
 
 import com.itacademy.automation.task4.Boy;
 import org.testng.annotations.DataProvider;
@@ -6,7 +6,7 @@ import org.testng.annotations.Factory;
 
 import java.time.Month;
 
-public class MonthTestFactory {
+public class IsSummerMonthTestFactory {
 
     @DataProvider(name = "isSummerMonthTest")
     public Object[][] isSummerMonthTestData() {
@@ -27,9 +27,7 @@ public class MonthTestFactory {
     }
 
     @Factory(dataProvider = "isSummerMonthTest")
-    public Object[] createTest(Boy boy, boolean expectedResult){
-        return new Object[]{new MonthTest(boy, expectedResult)};
+    public Object[] createTest(Boy boy, boolean expectedResult) {
+        return new Object[]{new IsSummerMonthTest(boy, expectedResult)};
     }
-
-
 }

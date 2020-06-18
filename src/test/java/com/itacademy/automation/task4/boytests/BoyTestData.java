@@ -1,12 +1,11 @@
-package com.itacademy.automation;
+package com.itacademy.automation.task4.boytests;
 
 import com.itacademy.automation.task4.Boy;
 import com.itacademy.automation.task4.Girl;
 import com.itacademy.automation.task4.Mood;
 import org.testng.annotations.DataProvider;
-import static com.itacademy.automation.task4helpers.random.RandomGenerator.*;
 
-import static org.testng.Assert.assertEquals;
+import static com.itacademy.automation.task4helpers.random.RandomGenerator.*;
 
 
 public class BoyTestData {
@@ -29,7 +28,6 @@ public class BoyTestData {
                 {new Boy(generateRandomMonth(), generateRandomWealthBetweenZeroAndMillion()), false},
                 {new Boy(generateRandomMonth(), 1_000_000), true},
                 {new Boy(generateRandomMonth(), generateRandomWealthMoreThanMillion()), true}
-
         };
     }
 
@@ -50,9 +48,4 @@ public class BoyTestData {
 
         };
     }
-
-
-
-
-
 }
