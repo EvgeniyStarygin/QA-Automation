@@ -24,7 +24,7 @@ public class WrappedDriver {
         driver = null;
     }
 
-    public static WebDriverWait webDriverWait() {
+    public static WebDriverWait waitUntil() {
         return new WebDriverWait(driver, TIMEOUT);
     }
 
