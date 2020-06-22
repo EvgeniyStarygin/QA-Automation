@@ -33,46 +33,44 @@ public abstract class RandomGenerator {
         return values[index];
     }
 
-    // [a, b)
     private static double generateDoubleValueFromInterval(double min, double max) {
         double value = (random.nextDouble() * (max - min)) + min;
         return DoubleRounder.round(value, 3);
     }
 
-    // (0; 1_000_000)
     public static double generateRandomWealthBetweenZeroAndMillion() {
-        double value;
+        double minValue = 0.0;
+        double maxValue = 1_000_000.0;
+        double generatedValue;
         do {
-            value = generateDoubleValueFromInterval(0, 1_000_000);
-        } while (value == 0.0);
-        return value;
+            generatedValue = generateDoubleValueFromInterval(minValue, maxValue);
+        } while (generatedValue == minValue);
+        return generatedValue;
     }
 
-    // (1_000_000; 1_000_001)
     public static double generateRandomWealthMoreThanMillion() {
-        double value;
+        double minValue = 1_000_000.0;
+        double maxValue = 1_000_001.0;
+        double generatedValue;
         do {
-            value = generateDoubleValueFromInterval(1_000_000, 1_000_001);
-        } while (value == 1_000_000.0);
-        return value;
+            generatedValue = generateDoubleValueFromInterval(minValue, maxValue);
+        } while (generatedValue == minValue);
+        return generatedValue;
     }
 
-    // [-1; 0)
     public static double generateRandomNegativeWealth() {
-        return generateDoubleValueFromInterval(-1, 0);
+        double minValue = -1.0;
+        double maxValue = 0.0;
+        return generateDoubleValueFromInterval(minValue, maxValue);
     }
 
-    // (0; 1_000_001)
     public static double generateRandomPositiveWealth() {
-        double value;
+        double minValue = 0.0;
+        double maxValue = 1_000_001.0;
+        double generatedValue;
         do {
-            value = generateDoubleValueFromInterval(0, 1_000_001);
-        } while (value == 0.0);
-        return value;
-    }
-
-
-    public static void main(String[] args) {
-        System.out.println(generateRandomPositiveWealth());
+            generatedValue = generateDoubleValueFromInterval(minValue, maxValue);
+        } while (generatedValue == 0.0);
+        return generatedValue;
     }
 }

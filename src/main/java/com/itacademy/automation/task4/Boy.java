@@ -2,8 +2,8 @@ package com.itacademy.automation.task4;
 
 import java.time.Month;
 
-import com.itacademy.automation.task4helpers.exception.BirthdayIsNullException;
-import com.itacademy.automation.task4helpers.exception.NegativeWealthException;
+import com.itacademy.automation.task4helpers.exceptions.BirthdayIsNullException;
+import com.itacademy.automation.task4helpers.exceptions.NegativeWealthException;
 import lombok.Getter;
 import lombok.Setter;
 
