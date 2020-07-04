@@ -1,10 +1,13 @@
 package task6.screens;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import task6.entities.WrappedDriver;
 
-public class MailRuLoginForm extends BasePage {
+public class MailRuLoginFormPage extends BasePage {
 
     private static final String URL = "https://mail.ru";
 
@@ -23,28 +26,29 @@ public class MailRuLoginForm extends BasePage {
     @FindBy(xpath = "//label[@id='mailbox:submit']//input[@type='submit']")
     private WebElement loginButton;
 
-    public MailRuLoginForm loadPage(){
+    public MailRuLoginFormPage loadPage(){
         driver.get(URL);
         return this;
     }
 
-    public MailRuLoginForm typeLogin(String login){
+    public MailRuLoginFormPage typeLogin(String login){
         loginInput.sendKeys(login);
         return this;
     }
 
-    public MailRuLoginForm selectDomain(String domain){
+    public MailRuLoginFormPage selectDomain(String domain){
         Select select = new Select(domainSelector);
         select.selectByVisibleText(domain);
         return this;
     }
 
-    public MailRuLoginForm clickTypePasswordButton(){
+    public MailRuLoginFormPage clickTypePasswordButton(){
         typePasswordButton.click();
         return this;
     }
 
     public boolean isErrorMassageDisplayed(){
+        WrappedDriver.waitUntil().until(ExpectedConditions.visibilityOf(errorMessage));
         return errorMessage.isDisplayed();
     }
 
@@ -52,16 +56,18 @@ public class MailRuLoginForm extends BasePage {
         return errorMessage.getText();
     }
 
-    public MailRuLoginForm typePassword(String password){
+    public MailRuLoginFormPage typePassword(String password){
         passwordInput.sendKeys(password);
         return this;
     }
 
-    public void clickLoginButton(){
+    public MailRuEmailPage clickLoginButton(){
         loginButton.click();
+        return new MailRuEmailPage();
     }
 
     public String getPasswordFormHeader(){
+        WrappedDriver.waitUntil().until(ExpectedConditions.visibilityOf(passwordFormHeader));
         return passwordFormHeader.getText();
     }
 }

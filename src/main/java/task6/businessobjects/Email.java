@@ -1,4 +1,4 @@
-package task6.entities;
+package task6.businessobjects;
 
 public class Email {
     private String login;

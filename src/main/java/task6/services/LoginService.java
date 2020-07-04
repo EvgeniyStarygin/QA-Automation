@@ -1,25 +1,25 @@
 package task6.services;
 
+import task6.businessobjects.Email;
 import task6.businessobjects.User;
-import task6.screens.MailRuLoginForm;
+import task6.screens.MailRuLoginFormPage;
 
 public class LoginService {
 
-    private static MailRuLoginForm mailRuLoginForm;
+    private static MailRuLoginFormPage mailRuLoginFormPage;
 
-    public static void enterEmail(User user) {
-        mailRuLoginForm = new MailRuLoginForm();
-        mailRuLoginForm
+    public static void enterEmail(Email email) {
+        mailRuLoginFormPage = new MailRuLoginFormPage();
+        mailRuLoginFormPage
                 .loadPage()
-                .typeLogin(user.getEmail().getLogin())
-                .selectDomain(user.getEmail().getDomain())
+                .typeLogin(email.getLogin())
+                .selectDomain(email.getDomain())
                 .clickTypePasswordButton();
     }
 
-    public static void logIn(User user) throws InterruptedException {
-        enterEmail(user);
-        Thread.sleep(3000);
-        mailRuLoginForm
+    public static void logIn(User user)  {
+        enterEmail(user.getEmail());
+        mailRuLoginFormPage
                 .typePassword(user.getPassword())
                 .clickLoginButton();
     }

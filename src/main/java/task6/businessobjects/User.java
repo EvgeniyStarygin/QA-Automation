@@ -1,7 +1,5 @@
 package task6.businessobjects;
 
-import task6.entities.Email;
-
 public class User {
 
     private Email email;

@@ -1,23 +1,6 @@
 package task6.businessobjects;
 
-import static task6.random.RandomGenerator.generateRandomIncorrectDomain;
-
 public class UserFactory {
-
-    public static User getUserWithCorrectEmail() {
-        return new User()
-                .withEmail("itacademyselenium", "@mail.ru");
-    }
-
-    public static User getUserWithIncorrectEmailName() {
-        return new User()
-                .withEmail("!#$%^&", "@mail.ru");
-    }
-
-    public static User getUserWithIncorrectEmailDomain() {
-        return new User()
-                .withEmail("!#$%^&", generateRandomIncorrectDomain());
-    }
 
     public static User getUserWithCorrectCredentials() {
         return new User()
@@ -31,4 +14,9 @@ public class UserFactory {
                 .withPassword("password");
     }
 
+    public static User getUserWithEmptyPassword() {
+        return new User()
+                .withEmail("itacademyselenium", "@mail.ru")
+                .withPassword("");
+    }
 }
