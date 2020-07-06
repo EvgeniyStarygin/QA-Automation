@@ -17,34 +17,38 @@ public class SendCorrectLetterTest {
     private static MailRuEmailPage mailRuEmailPage;
 
 
-    /*@BeforeMethod
+    @BeforeMethod
     public void deleteLetterIfPresent() throws InterruptedException {
         LoginService.logIn(UserFactory.getUserWithCorrectCredentials());
         mailRuEmailPage = new MailRuEmailPage();
         mailRuEmailPage.deleteInboxLetter();
         mailRuEmailPage.deleteSentLetter();
-    }*/
+    }
 
-   /*@AfterMethod
+   @AfterMethod
     public void deleteLetter() throws InterruptedException {
        mailRuEmailPage.deleteInboxLetter();
        mailRuEmailPage.deleteSentLetter();
-    }*/
+    }
 
     @Test
     public void sendCorrectLetterTest()  {
         Letter newLetter = LetterFactory.getCorrectLetter();
-        LoginService.logIn(UserFactory.getUserWithCorrectCredentials());
+        //LoginService.logIn(UserFactory.getUserWithCorrectCredentials());
         SendNewLetterPage sendNewLetterPage = SendNewLetterService.openNewLetterPage(UserFactory.getUserWithCorrectCredentials());
         SendNewLetterService.sendNewLetter(newLetter);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(sendNewLetterPage.isSuccessConfirmationWindowDisplayed());
         sendNewLetterPage.closeSuccessConfirmationWindow();
         mailRuEmailPage = new MailRuEmailPage();
-        softAssert.assertEquals(mailRuEmailPage.getLetterSubjectInInboxFolder(), newLetter.getSubject());
-        softAssert.assertEquals(mailRuEmailPage.getLetterTextInInboxFolder(), newLetter.getText());
-        softAssert.assertEquals(mailRuEmailPage.getLetterSubjectInSentFolder(), "Self: " + newLetter.getSubject());
-        softAssert.assertEquals(mailRuEmailPage.getLetterTextInSentFolder(),  newLetter.getText());
+        mailRuEmailPage.clickInboxLettersLink();
+        mailRuEmailPage.clickLetterLink();
+        softAssert.assertEquals(mailRuEmailPage.getLetterSubject(), newLetter.getSubject());
+        softAssert.assertEquals(mailRuEmailPage.getLetterText(), newLetter.getText());
+        mailRuEmailPage.clickSentLettersLink();
+        mailRuEmailPage.clickLetterLink();
+        softAssert.assertEquals(mailRuEmailPage.getLetterSubject(), "Self: " + newLetter.getSubject());
+        softAssert.assertEquals(mailRuEmailPage.getLetterText(),  newLetter.getText());
         softAssert.assertAll();
     }
 }

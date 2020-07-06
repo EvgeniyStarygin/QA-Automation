@@ -42,10 +42,10 @@ public class SendLetterWithoutBodyTest  {
         sendNewLetterPage.closeSuccessConfirmationWindow();
         mailRuEmailPage = new MailRuEmailPage();
         mailRuEmailPage = new MailRuEmailPage();
-        softAssert.assertEquals(mailRuEmailPage.getLetterSubjectInInboxFolder(), newLetter.getSubject());
+        /*softAssert.assertEquals(mailRuEmailPage.getLetterSubjectInInboxFolder(), newLetter.getSubject());
         softAssert.assertEquals(mailRuEmailPage.getLetterTextInInboxFolder(), " ");
         softAssert.assertEquals(mailRuEmailPage.getLetterSubjectInSentFolder(), "Self: " + newLetter.getSubject());
-        softAssert.assertEquals(mailRuEmailPage.getLetterTextInSentFolder(),  " ");
+        softAssert.assertEquals(mailRuEmailPage.getLetterTextInSentFolder(),  " ");*/
         softAssert.assertAll();
     }
 }

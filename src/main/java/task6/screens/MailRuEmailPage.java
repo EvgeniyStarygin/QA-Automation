@@ -34,46 +34,13 @@ public class MailRuEmailPage extends BasePage {
         return new SendNewLetterPage();
     }
 
-
-    public String getLetterSubjectInInboxFolder()  {
-        clickInboxLettersLink();
-        return getLetterSubject();
-    }
-
-    public String getLetterTextInInboxFolder() {
-        clickInboxLettersLink();
-        return getLetterText();
-    }
-
-    public String getLetterSubjectInSentFolder()  {
-        clickSentLettersLink();
-        return getLetterSubject();
-    }
-
-    public String getLetterTextInSentFolder() {
-        clickSentLettersLink();
-        return getLetterText();
-    }
-
-    public String getLetterSubjectInTrashFolder()  {
-        clickTrashLink();
-        return getLetterSubject();
-    }
-
-    public String getLetterTextInTrashFolder() {
-        clickTrashLink();
-        return getLetterText();
-    }
-
     public String getLetterSubject(){
-        clickLetterLink();
         WrappedDriver.waitUntil().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h2"))));
         WebElement lastLetterSubject = driver.findElement(By.xpath("//h2"));
         return lastLetterSubject.getText();
     }
 
     public String getLetterText(){
-        clickLetterLink();
         WrappedDriver.waitUntil().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@id, 'BODY')]/div/div[1]"))));
         WebElement lastLetterText = driver.findElement(By.xpath("//div[contains(@id, 'BODY')]/div/div[1]"));
         return lastLetterText.getText();
@@ -155,14 +122,16 @@ public class MailRuEmailPage extends BasePage {
     }
 
     public void selectCheckboxForOneLetter() throws InterruptedException {
-        WrappedDriver.waitUntil().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(@class, 'll-av__checkbox')]//input[@type='checkbox']")));
-        checkboxForOneLetter = driver.findElement(By.xpath("//span[contains(@class, 'll-av__checkbox')]//input[@type='checkbox']"));
+        //WrappedDriver.waitUntil().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(@class, 'll-av__checkbox')]//input[@type='checkbox']")));
+        Thread.sleep(2000);
         Actions actions = new Actions(driver);
         actions
-                .moveToElement(checkboxForOneLetter)
+                .moveToElement(driver.findElement(By.xpath("//span[contains(@class, 'll-av__checkbox')]//input[@type='checkbox']")))
                 .click()
                 .build()
                 .perform();
+
+        // fluent wait
     }
 
 

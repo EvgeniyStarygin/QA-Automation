@@ -34,8 +34,8 @@ public class CreateDraftTest {
         MailRuEmailPage mailRuEmailPage = sendNewLetterPage.closeNewLetterWindow();
         mailRuEmailPage.deleteDraftLetter();
         SoftAssert softAssert = new SoftAssert();
-        //softAssert.assertEquals(mailRuEmailPage.getLetterSubjectInTrashFolder(), newLetter.getSubject());
-        //softAssert.assertEquals(mailRuEmailPage.getLetterTextInTrashFolder(), newLetter.getText());
+        softAssert.assertEquals(mailRuEmailPage.getLetterSubject(), newLetter.getSubject());
+        softAssert.assertEquals(mailRuEmailPage.getLetterText(), newLetter.getText());
         mailRuEmailPage.deleteTrashLetter();
         softAssert.assertFalse(mailRuEmailPage.isLetterPresent());
         softAssert.assertAll();
