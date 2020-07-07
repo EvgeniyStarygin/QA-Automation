@@ -17,6 +17,6 @@ public class IsSummerMonthTest {
 
     @Test(description = "using Factory")
     public void isSummerMonthTest() {
-        assertEquals(boy.isSummerMonth(), expectedResult);
+        assertEquals(boy.isSummerMonth(), expectedResult, "Boyfriend wasn't born in summer");
     }
 }

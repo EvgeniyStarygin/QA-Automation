@@ -35,7 +35,7 @@ public class BoyTest {
 
     @Test(dataProvider = "getMoodTest")
     public void getMoodTest(Boy boy, Mood expectedMood) {
-        assertEquals(boy.getMood(), expectedMood);
+        assertEquals(boy.getMood(), expectedMood, "Unexpected  boyfriend's mood");
     }
 
     @DataProvider(name = "isPrettyGirlFriendTest")
@@ -49,7 +49,7 @@ public class BoyTest {
 
     @Test(dataProvider = "isPrettyGirlFriendTest")
     public void isPrettyGirlFriendTest(Boy boy, boolean expectedResult) {
-        assertEquals(boy.isPrettyGirlFriend(), expectedResult);
+        assertEquals(boy.isPrettyGirlFriend(), expectedResult, "Unexpected girlfriend's prettiness");
     }
 
     @DataProvider(name = "isRichTest")
@@ -65,7 +65,7 @@ public class BoyTest {
 
     @Test(dataProvider = "isRichTest")
     public void isRichTest(Boy boy, boolean expectedResult) {
-        assertEquals(boy.isRich(), expectedResult);
+        assertEquals(boy.isRich(), expectedResult, "Unexpected boyfriend's richness");
     }
 
     @Test(description = "amount for spending > wealth", expectedExceptions = RuntimeException.class, groups = "spendSomeMoneyTest")
@@ -81,7 +81,7 @@ public class BoyTest {
         double expectedWealth = 0.0;
         boy = new Boy(generateRandomMonth(), wealth);
         boy.spendSomeMoney(amountForSpending);
-        assertEquals(boy.getWealth(), expectedWealth);
+        assertEquals(boy.getWealth(), expectedWealth, "Unexpected wealth after spending of money");
     }
 
     @Test(description = "amount for spending < wealth", groups = "spendSomeMoneyTest")
@@ -90,7 +90,7 @@ public class BoyTest {
         double amountForSpending = generateRandomWealthBetweenZeroAndMillion();
         boy = new Boy(generateRandomMonth(), wealth);
         boy.spendSomeMoney(amountForSpending);
-        assertEquals(boy.getWealth(), wealth - amountForSpending);
+        assertEquals(boy.getWealth(), wealth - amountForSpending, "Unexpected wealth after spending of money");
     }
 
     @Test(expectedExceptions = BirthdayIsNullException.class, groups = "constructorExceptions")

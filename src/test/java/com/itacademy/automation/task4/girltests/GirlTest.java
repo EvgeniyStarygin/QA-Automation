@@ -29,7 +29,7 @@ public class GirlTest {
 
     @Test(dataProvider = "getMoodTest")
     public void getMoodTest(Girl girl, Mood expectedMood) {
-        assertEquals(girl.getMood(), expectedMood);
+        assertEquals(girl.getMood(), expectedMood, "Unexpected girlfriend's mood");
     }
 
     @DataProvider(name = "isSlimFriendBecameFatTest")
@@ -44,7 +44,7 @@ public class GirlTest {
 
     @Test(dataProvider = "isSlimFriendBecameFatTest")
     public void isSlimFriendBecameFatTest(Girl girl, boolean expectedResult) {
-        assertEquals(girl.isSlimFriendBecameFat(), expectedResult);
+        assertEquals(girl.isSlimFriendBecameFat(), expectedResult, "Unexpected girlfriend's slimness");
     }
 
     @DataProvider(name = "isBoyFriendWillBuyNewShoesTest")
@@ -60,7 +60,7 @@ public class GirlTest {
 
     @Test(dataProvider = "isBoyFriendWillBuyNewShoesTest")
     public void isBoyFriendWillBuyNewShoesTest(Girl girl, boolean expectedResult) {
-        assertEquals(girl.isBoyFriendWillBuyNewShoes(), expectedResult);
+        assertEquals(girl.isBoyFriendWillBuyNewShoes(), expectedResult, "Unexpected decision to buy new shoes");
     }
 
     @DataProvider(name = "isBoyfriendRichTest")
@@ -74,7 +74,7 @@ public class GirlTest {
 
     @Test(dataProvider = "isBoyfriendRichTest")
     public void isBoyfriendRichTest(Girl girl, boolean expectedResult) {
-        assertEquals(girl.isBoyfriendRich(), expectedResult);
+        assertEquals(girl.isBoyfriendRich(), expectedResult, "Unexpected boyfriend's richness");
     }
 
     @Test(description = "boyfriend = null", expectedExceptions = BoyfriendIsNullException.class, groups = "spendBoyFriendMoneyTestGroup")
@@ -100,7 +100,7 @@ public class GirlTest {
         girl = new Girl(generateRandomBooleanValue(), generateRandomBooleanValue(), boy);
         double amountForSpending = generateRandomWealthBetweenZeroAndMillion();
         girl.spendBoyFriendMoney(amountForSpending);
-        assertEquals(boy.getWealth(), boyWealth - amountForSpending);
+        assertEquals(boy.getWealth(), boyWealth - amountForSpending, "Unexpected wealth after spending boyfriend's money");
     }
 
     @Test(description = "isBoyFriendRich() = false", groups = "spendBoyFriendMoneyTestGroup")
@@ -109,6 +109,6 @@ public class GirlTest {
         boy = new Boy(generateRandomMonth(), boyWealth);
         girl = new Girl(generateRandomBooleanValue(), generateRandomBooleanValue(), boy);
         girl.spendBoyFriendMoney(generateRandomWealthBetweenZeroAndMillion());
-        assertEquals(boy.getWealth(), boyWealth);
+        assertEquals(boy.getWealth(), boyWealth, "Unexpected wealth after spending boyfriend's money");
     }
 }
