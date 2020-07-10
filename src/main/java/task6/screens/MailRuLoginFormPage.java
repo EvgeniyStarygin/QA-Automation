@@ -1,73 +1,54 @@
 package task6.screens;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import task6.entities.WrappedDriver;
 
 public class MailRuLoginFormPage extends BasePage {
 
     private static final String URL = "https://mail.ru";
 
-    @FindBy(xpath = "//input[@id='mailbox:login']")
-    private WebElement loginInput;
-    @FindBy(xpath = "//select[@id='mailbox:domain']")
-    private WebElement domainSelector;
-    @FindBy(xpath = "//label[@id='mailbox:submit']//input[@type='submit']")
-    private WebElement typePasswordButton;
-    @FindBy(xpath = "//div[@id='mailbox:error']")
-    private WebElement errorMessage;
-    @FindBy(xpath = "//div[@id='mailbox:mailHeaderSecondStepEmail']")
-    private WebElement passwordFormHeader;
-    @FindBy(xpath = "//input[@id='mailbox:password']")
-    private WebElement passwordInput;
-    @FindBy(xpath = "//label[@id='mailbox:submit']//input[@type='submit']")
-    private WebElement loginButton;
+    private static final By LOGIN_INPUT_LOCATOR = By.xpath("//input[@id='mailbox:login']");
+    private static final By DOMAIN_SELECTOR_LOCATOR = By.xpath("//select[@id='mailbox:domain']");
+    private static final By TYPE_PASSWORD_BUTTON_LOCATOR = By.xpath("//label[@id='mailbox:submit']//input[@type='submit']");
+    private static final By ERROR_MESSAGE_LOCATOR = By.xpath("//div[@id='mailbox:error']");
+    private static final By PASSWORD_INPUT_LOCATOR = By.xpath("//input[@id='mailbox:password']");
+    private static final By LOGIN_BUTTON_LOCATOR = By.xpath("//label[@id='mailbox:submit']//input[@type='submit']");
 
-    public MailRuLoginFormPage loadPage(){
-        driver.get(URL);
+    public MailRuLoginFormPage openPage() {
+        browser.openPage(URL);
         return this;
     }
 
-    public MailRuLoginFormPage typeLogin(String login){
-        loginInput.sendKeys(login);
+    public MailRuLoginFormPage typeLogin(String login) {
+        browser.typeTo(LOGIN_INPUT_LOCATOR, login);
         return this;
     }
 
-    public MailRuLoginFormPage selectDomain(String domain){
-        Select select = new Select(domainSelector);
-        select.selectByVisibleText(domain);
+    public MailRuLoginFormPage selectDomain(String domain) {
+        browser.selectFrom(DOMAIN_SELECTOR_LOCATOR, domain);
         return this;
     }
 
-    public MailRuLoginFormPage clickTypePasswordButton(){
-        typePasswordButton.click();
+    public MailRuLoginFormPage clickTypePasswordButton() {
+        browser.clickElement(TYPE_PASSWORD_BUTTON_LOCATOR);
         return this;
     }
 
-    public boolean isErrorMassageDisplayed(){
-        WrappedDriver.waitUntil().until(ExpectedConditions.visibilityOf(errorMessage));
-        return errorMessage.isDisplayed();
+    public boolean isErrorMassageDisplayed() {
+        return browser.isDisplayed(ERROR_MESSAGE_LOCATOR);
     }
 
-    public String getErrorMessageText(){
-        return errorMessage.getText();
+    public String getErrorMessageText() {
+        return browser.getTextFrom(ERROR_MESSAGE_LOCATOR);
     }
 
-    public MailRuLoginFormPage typePassword(String password){
-        passwordInput.sendKeys(password);
+    public MailRuLoginFormPage typePassword(String password) {
+        browser.typeTo(PASSWORD_INPUT_LOCATOR, password);
         return this;
     }
 
-    public MailRuEmailPage clickLoginButton(){
-        loginButton.click();
+    public MailRuEmailPage clickLoginButton() {
+        browser.clickElement(LOGIN_BUTTON_LOCATOR);
         return new MailRuEmailPage();
     }
 
-    public String getPasswordFormHeader(){
-        WrappedDriver.waitUntil().until(ExpectedConditions.visibilityOf(passwordFormHeader));
-        return passwordFormHeader.getText();
-    }
 }

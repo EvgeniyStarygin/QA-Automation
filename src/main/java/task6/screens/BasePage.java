@@ -1,16 +1,13 @@
 package task6.screens;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import task6.entities.WrappedDriver;
+import task6.entities.Browser;
 
 public class BasePage {
 
-    protected WebDriver driver;
+    protected static Browser browser;
 
     public BasePage() {
-        this.driver = WrappedDriver.getInstance();
-        PageFactory.initElements(driver, this);
+        browser = Browser.getInstance();
     }
 }

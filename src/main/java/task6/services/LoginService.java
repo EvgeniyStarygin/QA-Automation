@@ -11,7 +11,7 @@ public class LoginService {
     public static void enterEmail(Email email) {
         mailRuLoginFormPage = new MailRuLoginFormPage();
         mailRuLoginFormPage
-                .loadPage()
+                .openPage()
                 .typeLogin(email.getLogin())
                 .selectDomain(email.getDomain())
                 .clickTypePasswordButton();

@@ -1,137 +1,88 @@
 package task6.screens;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import task6.entities.WrappedDriver;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class MailRuEmailPage extends BasePage {
 
-    private WebElement userId;
-    private WebElement newLetterButton;
-    private WebElement checkboxForOneLetter;
-    private WebElement deleteLetterButton;
-    private WebElement inboxLettersLink;
-    private WebElement sentLettersLink;
-    private WebElement draftsLink;
-    private WebElement trashLink;
-    private WebElement letterLink;
+    private static final By USER_ID_LOCATOR = By.xpath("//i[@id='PH_user-email']");
+    private static final By NEW_LETTER_BUTTON_LOCATOR = By.xpath("//a[@title='Написать письмо']");
+    private static final By CHECKBOX_FOR_ONE_LETTER_LOCATOR = By.xpath("//button[contains(@class, 'll-av')]");
+    private static final By DELETE_LETTER_BUTTON_LOCATOR = By.xpath("//span[@title='Удалить']");
+    private static final By INBOX_LETTERS_LINK_LOCATOR = By.xpath("//a[@data-title='Входящие'] | //a[@title='Входящие']");
+    private static final By SENT_LETTERS_LINK_LOCATOR = By.xpath("//a[@data-title='Отправленные'] | //a[@title='Отправленные']");
+    private static final By DRAFTS_LINK_LOCATOR = By.xpath("//a[@data-title='Черновики'] | //a[@title='Черновики']");
+    private static final By TRASH_LINK_LOCATOR = By.xpath("//a[@data-title='Корзина'] | //a[@title='Корзина']");
+    private static final By LETTER_LINK_LOCATOR = By.xpath("//a[contains(@class,'llc_normal')]");
 
 
     public MailRuEmailPage clickLetterLink() {
-        letterLink = driver.findElement(By.xpath("//a[contains(@class,'llc_normal')]"));
-        letterLink.click();
+        //fluentWait(By.xpath(LETTER_LINK_XPATH));
+        browser.clickElement(LETTER_LINK_LOCATOR);
         return this;
     }
 
     public SendNewLetterPage clickNewLetterButton() {
-        newLetterButton = driver.findElement(By.xpath("//a[@title='Написать письмо']"));
-        newLetterButton.click();
+        browser.clickElement(NEW_LETTER_BUTTON_LOCATOR);
         return new SendNewLetterPage();
     }
 
-    public String getLetterSubject(){
-        WrappedDriver.waitUntil().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h2"))));
-        WebElement lastLetterSubject = driver.findElement(By.xpath("//h2"));
-        return lastLetterSubject.getText();
+    public String getLetterSubject() {
+        browser.waitUntil().until(ExpectedConditions.visibilityOf(browser.findElementBy(By.xpath("//h2"))));
+        return browser.getTextFrom(By.xpath("//h2"));
     }
 
-    public String getLetterText(){
-        WrappedDriver.waitUntil().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@id, 'BODY')]/div/div[1]"))));
-        WebElement lastLetterText = driver.findElement(By.xpath("//div[contains(@id, 'BODY')]/div/div[1]"));
-        return lastLetterText.getText();
+    public String getLetterText() {
+        browser.waitUntil().until(ExpectedConditions.visibilityOf(browser.findElementBy(By.xpath("//div[contains(@id, 'BODY')]/div/div[1]"))));
+        return browser.getTextFrom(By.xpath("//div[contains(@id, 'BODY')]/div/div[1]"));
     }
 
     public boolean isLetterPresent() {
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        List<WebElement> lettersLinks = driver.findElements(By.xpath("//a[contains(@class,'llc_normal')]"));
-        if (lettersLinks.size() == 0) return false;
+        if (browser.findElementsBy(LETTER_LINK_LOCATOR).size() == 0) return false;
         else return true;
     }
 
-    public void deleteInboxLetter() throws InterruptedException {
-        clickInboxLettersLink();
+    public MailRuEmailPage deleteLetter() {
         if (isLetterPresent()) {
             selectCheckboxForOneLetter();
             clickDeleteLetterButton();
         }
-    }
-
-    public void deleteSentLetter() throws InterruptedException {
-        clickSentLettersLink();
-        if (isLetterPresent()) {
-            selectCheckboxForOneLetter();
-            clickDeleteLetterButton();
-        }
-    }
-
-    public void deleteDraftLetter() throws InterruptedException {
-        clickDraftsLink();
-        if (isLetterPresent()) {
-            selectCheckboxForOneLetter();
-            clickDeleteLetterButton();
-        }
-    }
-
-    public void deleteTrashLetter() throws InterruptedException {
-        clickTrashLink();
-        if (isLetterPresent()) {
-            selectCheckboxForOneLetter();
-            clickDeleteLetterButton();
-        }
+        return this;
     }
 
 
     public MailRuEmailPage clickInboxLettersLink() {
-        inboxLettersLink = driver.findElement(By.xpath("//a[@data-title='Входящие'] | //a[@title='Входящие']"));
-        inboxLettersLink.click();
+        browser.clickElement(INBOX_LETTERS_LINK_LOCATOR);
         return this;
     }
 
     public MailRuEmailPage clickSentLettersLink() {
-        sentLettersLink = driver.findElement(By.xpath("//a[@data-title='Отправленные'] | //a[@title='Отправленные']"));
-        sentLettersLink.click();
+        browser.clickElement(SENT_LETTERS_LINK_LOCATOR);
         return this;
     }
 
     public MailRuEmailPage clickDraftsLink() {
-        draftsLink = driver.findElement(By.xpath("//a[@data-title='Черновики'] | //a[@title='Черновики']"));
-        draftsLink.click();
+        browser.clickElement(DRAFTS_LINK_LOCATOR);
         return this;
     }
 
     public MailRuEmailPage clickTrashLink() {
-        trashLink = driver.findElement(By.xpath("//a[@data-title='Корзина'] | //a[@title='Корзина']"));
-        trashLink.click();
+        browser.clickElement(TRASH_LINK_LOCATOR);
         return this;
     }
 
     public String getUserId() {
-        WrappedDriver.waitUntil().until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//i[@id='PH_user-email']"))));
-        userId = driver.findElement(By.xpath("//i[@id='PH_user-email']"));
-        return userId.getText();
+        browser.waitForVisibilityOf(USER_ID_LOCATOR);
+        return browser.getTextFrom(USER_ID_LOCATOR);
     }
 
     public void clickDeleteLetterButton() {
-        deleteLetterButton = driver.findElement(By.xpath("//span[@title='Удалить']"));
-        deleteLetterButton.click();
+        browser.clickElement(DELETE_LETTER_BUTTON_LOCATOR);
     }
 
-    public void selectCheckboxForOneLetter() throws InterruptedException {
-        //WrappedDriver.waitUntil().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(@class, 'll-av__checkbox')]//input[@type='checkbox']")));
-        Thread.sleep(2000);
-        Actions actions = new Actions(driver);
-        actions
-                .moveToElement(driver.findElement(By.xpath("//span[contains(@class, 'll-av__checkbox')]//input[@type='checkbox']")))
-                .click()
-                .build()
-                .perform();
-
-        // fluent wait
+    public void selectCheckboxForOneLetter() {
+        browser.selectCheckbox(CHECKBOX_FOR_ONE_LETTER_LOCATOR);
     }
 
 

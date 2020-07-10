@@ -11,42 +11,40 @@ import task6.screens.MailRuEmailPage;
 import task6.screens.SendNewLetterPage;
 import task6.services.LetterService;
 import task6.services.LoginService;
-import task6.tests.BaseTest;
 
-public class SendCorrectLetterTest extends BaseTest {
+public class DeleteLetterFromDraftsAndTrashTest {
 
     private static MailRuEmailPage mailRuEmailPage;
 
     @BeforeMethod
     public void deleteLetterIfPresent() {
         LoginService.logIn(UserFactory.getUserWithCorrectCredentials());
-        LetterService.deleteLetterFromInboxAndSent();
+        LetterService.deleteLetterFromDraftsAndTrash();
     }
 
     @AfterMethod
     public static void deleteLetter() {
-        LetterService.deleteLetterFromInboxAndSent();
+        LetterService.deleteLetterFromDraftsAndTrash();
     }
 
     @Test
-    public void sendCorrectLetterTest() {
+    public void deleteLetterFromDraftsAndTrashTest() {
         Letter newLetter = LetterFactory.getCorrectLetter();
         SendNewLetterPage sendNewLetterPage = LetterService.openNewLetterPage();
-        LetterService.sendNewLetter(newLetter);
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(sendNewLetterPage.isSuccessConfirmationWindowDisplayed());
-        sendNewLetterPage.closeSuccessConfirmationWindow();
-        mailRuEmailPage = new MailRuEmailPage();
+        LetterService.saveNewLetter(newLetter);
+        mailRuEmailPage = sendNewLetterPage.closeNewLetterWindow();
         mailRuEmailPage
-                .clickInboxLettersLink()
+                .clickDraftsLink()
+                .deleteLetter()
+                .clickTrashLink()
                 .clickLetterLink();
+        SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(mailRuEmailPage.getLetterSubject(), newLetter.getSubject());
         softAssert.assertEquals(mailRuEmailPage.getLetterText(), newLetter.getText());
         mailRuEmailPage
-                .clickSentLettersLink()
-                .clickLetterLink();
-        softAssert.assertEquals(mailRuEmailPage.getLetterSubject(), "Self: " + newLetter.getSubject());
-        softAssert.assertEquals(mailRuEmailPage.getLetterText(), newLetter.getText());
+                .clickTrashLink()
+                .deleteLetter();
+        softAssert.assertFalse(mailRuEmailPage.isLetterNotPresent());
         softAssert.assertAll();
     }
 }

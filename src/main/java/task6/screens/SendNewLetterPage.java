@@ -1,88 +1,77 @@
 package task6.screens;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class SendNewLetterPage extends MailRuEmailPage {
 
-    @FindBy(xpath = "//label[contains(@class, 'container--zU301')]//input[@type='text']")
-    private WebElement addressInput;
-    @FindBy(xpath = "//input[@name='Subject']")
-    private WebElement subjectInput;
-    @FindBy(xpath = "//div[@role='textbox']")
-    private WebElement emailTextInput;
-    @FindBy(xpath = "//span[@title='Отправить']")
-    private WebElement sendButton;
-    @FindBy(xpath = "//span[@title='Сохранить']")
-    private WebElement saveButton;
-    @FindBy(xpath = "//div[@class='layer-sent-page']")
-    private WebElement successConfirmationWindow;
-    @FindBy(xpath = "//div[contains(@class, 'rowError--O4k-g')]")
-    private WebElement emptyAddressErrorMessage;
-    @FindBy(xpath = "//div[contains(@class, 'c2110')]")
-    private WebElement warningWindow;
-    @FindBy(xpath = "//button[@title='Закрыть' and not(@disabled)]")
-    private WebElement closeNewLetterWindowButton;
-
+    private static final By ADDRESS_INPUT_LOCATOR = By.xpath("//label[contains(@class, 'container--zU301')]//input[@type='text']");
+    private static final By SUBJECT_INPUT_LOCATOR = By.xpath("//input[@name='Subject']");
+    private static final By MESSAGE_INPUT_LOCATOR = By.xpath("//div[@role='textbox']");
+    private static final By SEND_BUTTON_LOCATOR = By.xpath("//span[@title='Отправить']");
+    private static final By SAVE_BUTTON_LOCATOR = By.xpath("//span[@title='Сохранить']");
+    private static final By SUCCESS_CONFIRMATION_WINDOW_LOCATOR = By.xpath("//div[@class='layer-sent-page']");
+    private static final By EMPTY_EMAIL_ERROR_MESSAGE_LOCATOR = By.xpath("//div[contains(@class, 'rowError--O4k-g')]");
+    private static final By WARNING_WINDOW_LOCATOR = By.xpath("//div[contains(@class, 'c2110')]");
+    private static final By CLOSE_NEW_LETTER_WINDOW_BUTTON_LOCATOR = By.xpath("//button[@title='Закрыть' and not(@disabled)]");
 
     public SendNewLetterPage typeAddress(String address) {
-        addressInput.sendKeys(address);
+        browser.typeTo(ADDRESS_INPUT_LOCATOR, address);
         return this;
     }
 
     public SendNewLetterPage typeSubject(String subject) {
-        subjectInput.sendKeys(subject);
+        browser.typeTo(SUBJECT_INPUT_LOCATOR, subject);
         return this;
     }
 
-    public SendNewLetterPage typeEmailText(String text) {
-        emailTextInput.sendKeys(text);
+    public SendNewLetterPage typeMessage(String message) {
+        browser.typeTo(MESSAGE_INPUT_LOCATOR, message);
         return this;
     }
 
     public SendNewLetterPage clickSendButton() {
-        sendButton.click();
+        browser.clickElement(SEND_BUTTON_LOCATOR);
+        return this;
+    }
+
+    public SendNewLetterPage clickSaveButton() {
+        browser.clickElement(SAVE_BUTTON_LOCATOR);
         return this;
     }
 
 
-    public MailRuEmailPage closeSuccessConfirmationWindow() {
+    /*public MailRuEmailPage closeSuccessConfirmationWindow() {
+        browser.findElementBy(SUCCESS_CONFIRMATION_WINDOW_LOCATOR);
         successConfirmationWindow
                 .findElement(By.xpath("//span[@title='Закрыть']"))
                 .click();
         return new MailRuEmailPage();
-    }
+    }*/
 
     public boolean isSuccessConfirmationWindowDisplayed() {
-        return successConfirmationWindow.isDisplayed();
+        return browser.isDisplayed(SUCCESS_CONFIRMATION_WINDOW_LOCATOR);
     }
 
     public boolean isWarningWindowDisplayed() {
-        return warningWindow.isDisplayed();
+        return browser.isDisplayed(WARNING_WINDOW_LOCATOR);
     }
 
 
     public String getEmptyAddressErrorMessageText() {
-        return emptyAddressErrorMessage.getText();
+        return browser.getTextFrom(EMPTY_EMAIL_ERROR_MESSAGE_LOCATOR);
     }
 
-    public String getWarningWindowText() {
+    /*public String getWarningWindowText() {
         return warningWindow.findElement(By.xpath("//h1")).getText();
     }
 
     public void clickSendButtonOnWarningWindow() {
         warningWindow.findElement(By.xpath("//span[text()='Отправить']//parent::button")).click();
-    }
+    }*/
 
-
-    public SendNewLetterPage clickSaveButton() {
-        saveButton.click();
-        return this;
-    }
 
     public MailRuEmailPage closeNewLetterWindow() {
-        closeNewLetterWindowButton.click();
+        browser.clickElement(CLOSE_NEW_LETTER_WINDOW_BUTTON_LOCATOR);
         return new MailRuEmailPage();
     }
 

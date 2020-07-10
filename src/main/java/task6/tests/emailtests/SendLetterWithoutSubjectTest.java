@@ -1,5 +1,7 @@
 package task6.tests.emailtests;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import task6.businessobjects.Letter;
@@ -8,41 +10,43 @@ import task6.businessobjects.UserFactory;
 import task6.screens.MailRuEmailPage;
 import task6.screens.SendNewLetterPage;
 import task6.services.LoginService;
-import task6.services.SendNewLetterService;
+import task6.services.LetterService;
 import task6.tests.BaseTest;
 
-public class SendLetterWithoutSubjectTest {
+public class SendLetterWithoutSubjectTest extends BaseTest {
 
     private static MailRuEmailPage mailRuEmailPage;
 
-   /*@BeforeMethod
-    public void deleteLetterIfPresent() throws InterruptedException {
+    @BeforeMethod
+    public void deleteLetterIfPresent() {
         LoginService.logIn(UserFactory.getUserWithCorrectCredentials());
-        mailRuEmailPage = new MailRuEmailPage();
-        mailRuEmailPage.deleteInboxLetter();
-        mailRuEmailPage.deleteSentLetter();
-    }*/
+        LetterService.deleteLetterFromInboxAndSent();
+    }
 
-   /*@AfterMethod
-    public void deleteLetter() throws InterruptedException {
-       mailRuEmailPage.deleteInboxLetter();
-       mailRuEmailPage.deleteSentLetter();
-    }*/
+    @AfterMethod
+    public static void deleteLetter() {
+        LetterService.deleteLetterFromInboxAndSent();
+    }
 
     @Test
     public void sendLetterWithoutSubjectTest() {
         Letter newLetter = LetterFactory.getLetterWithoutSubject();
-        LoginService.logIn(UserFactory.getUserWithCorrectCredentials());
-        SendNewLetterPage sendNewLetterPage = SendNewLetterService.openNewLetterPage(UserFactory.getUserWithCorrectCredentials());
-        SendNewLetterService.sendNewLetter(newLetter);
+        SendNewLetterPage sendNewLetterPage = LetterService.openNewLetterPage();
+        LetterService.sendNewLetter(newLetter);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(sendNewLetterPage.isSuccessConfirmationWindowDisplayed());
         sendNewLetterPage.closeSuccessConfirmationWindow();
         mailRuEmailPage = new MailRuEmailPage();
-        /*softAssert.assertEquals(mailRuEmailPage.getLetterSubjectInInboxFolder(), "<Без темы>");
-        softAssert.assertEquals(mailRuEmailPage.getLetterTextInInboxFolder(), newLetter.getText());
-        softAssert.assertEquals(mailRuEmailPage.getLetterSubjectInSentFolder(), "Self:");
-        softAssert.assertEquals(mailRuEmailPage.getLetterTextInSentFolder(),  newLetter.getText());*/
+        mailRuEmailPage
+                .clickInboxLettersLink()
+                .clickLetterLink();
+        softAssert.assertEquals(mailRuEmailPage.getLetterSubject(), "<Без темы>");
+        softAssert.assertEquals(mailRuEmailPage.getLetterText(), newLetter.getText());
+        mailRuEmailPage
+                .clickSentLettersLink()
+                .clickLetterLink();
+        softAssert.assertEquals(mailRuEmailPage.getLetterSubject(), "Self:");
+        softAssert.assertEquals(mailRuEmailPage.getLetterText(), newLetter.getText());
         softAssert.assertAll();
     }
 }

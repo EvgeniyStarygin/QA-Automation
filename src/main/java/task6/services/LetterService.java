@@ -1,16 +1,15 @@
 package task6.services;
 
 import task6.businessobjects.Letter;
-import task6.businessobjects.User;
 import task6.screens.MailRuEmailPage;
 import task6.screens.SendNewLetterPage;
 
-public class SendNewLetterService {
+public class LetterService {
 
     private static MailRuEmailPage mailRuEmailPage;
     private static SendNewLetterPage sendNewLetterPage;
 
-    public static SendNewLetterPage openNewLetterPage(User user)  {
+    public static SendNewLetterPage openNewLetterPage() {
         mailRuEmailPage = new MailRuEmailPage();
         mailRuEmailPage.clickNewLetterButton();
         return new SendNewLetterPage();
@@ -21,7 +20,7 @@ public class SendNewLetterService {
         sendNewLetterPage
                 .typeAddress(letter.getAddress())
                 .typeSubject(letter.getSubject())
-                .typeEmailText(letter.getText())
+                .typeMessage(letter.getText())
                 .clickSendButton();
     }
 
@@ -30,7 +29,7 @@ public class SendNewLetterService {
         sendNewLetterPage
                 .typeAddress(letter.getAddress())
                 .typeSubject(letter.getSubject())
-                .typeEmailText(letter.getText())
+                .typeMessage(letter.getText())
                 .clickSaveButton();
     }
 
@@ -39,5 +38,23 @@ public class SendNewLetterService {
         sendNewLetterPage
                 .typeAddress(letter.getAddress())
                 .clickSendButton();
+    }
+
+    public static void deleteLetterFromInboxAndSent() {
+        mailRuEmailPage = new MailRuEmailPage();
+        mailRuEmailPage
+                .clickInboxLettersLink()
+                .deleteLetter()
+                .clickSentLettersLink()
+                .deleteLetter();
+    }
+
+    public static void deleteLetterFromDraftsAndTrash() {
+        mailRuEmailPage = new MailRuEmailPage();
+        mailRuEmailPage
+                .clickDraftsLink()
+                .deleteLetter()
+                .clickTrashLink()
+                .deleteLetter();
     }
 }
