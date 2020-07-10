@@ -9,8 +9,8 @@ public class TestRunner {
     public static void main(String[] args) {
         TestNG testNG = new TestNG();
         List<String> files = Arrays.asList(
-                "./src/test/resources/boytestssuite.xml",
-                "./src/test/resources/girltestssuite.xml");
+                "./src/test/resources/task4/boytestssuite.xml",
+                "./src/test/resources/task4/girltestssuite.xml");
         testNG.setTestSuites(files);
         testNG.run();
     }
