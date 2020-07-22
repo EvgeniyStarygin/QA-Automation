@@ -1,8 +1,9 @@
 package task6.screens;
 
 import org.openqa.selenium.By;
+import task6.entities.Browser;
 
-public class MailRuLoginFormPage extends BasePage {
+public class MailRuMainPage extends BasePage {
 
     private static final String URL = "https://mail.ru";
 
@@ -12,36 +13,44 @@ public class MailRuLoginFormPage extends BasePage {
     private static final By ERROR_MESSAGE_LOCATOR = By.xpath("//div[@id='mailbox:error']");
     private static final By PASSWORD_INPUT_LOCATOR = By.xpath("//input[@id='mailbox:password']");
     private static final By LOGIN_BUTTON_LOCATOR = By.xpath("//label[@id='mailbox:submit']//input[@type='submit']");
+    private static final By CLOUD_ICON_LOCATOR = By.xpath("//a[@title='Облако']");
 
-    public MailRuLoginFormPage openPage() {
+    public MailRuMainPage openPage() {
         browser.openPage(URL);
         return this;
     }
 
-    public MailRuLoginFormPage typeLogin(String login) {
+    public MailRuMainPage typeLogin(String login) {
         browser.typeTo(LOGIN_INPUT_LOCATOR, login);
         return this;
     }
 
-    public MailRuLoginFormPage selectDomain(String domain) {
+    public MailRuMainPage selectDomain(String domain) {
         browser.selectFrom(DOMAIN_SELECTOR_LOCATOR, domain);
         return this;
     }
 
-    public MailRuLoginFormPage clickTypePasswordButton() {
+    public MailRuMainPage clickTypePasswordButton() {
         browser.clickElement(TYPE_PASSWORD_BUTTON_LOCATOR);
         return this;
     }
 
+    public CloudMainPage clickCloudIcon() {
+        browser.clickElement(CLOUD_ICON_LOCATOR);
+        return new CloudMainPage();
+    }
+
     public boolean isErrorMassageDisplayed() {
+        browser.waitForVisibility(ERROR_MESSAGE_LOCATOR, Browser.LONG_TIMEOUT);
         return browser.isDisplayed(ERROR_MESSAGE_LOCATOR);
     }
 
     public String getErrorMessageText() {
+        browser.waitForVisibility(ERROR_MESSAGE_LOCATOR, Browser.LONG_TIMEOUT);
         return browser.getTextFrom(ERROR_MESSAGE_LOCATOR);
     }
 
-    public MailRuLoginFormPage typePassword(String password) {
+    public MailRuMainPage typePassword(String password) {
         browser.typeTo(PASSWORD_INPUT_LOCATOR, password);
         return this;
     }

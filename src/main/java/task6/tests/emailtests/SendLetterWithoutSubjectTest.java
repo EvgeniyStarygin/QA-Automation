@@ -9,8 +9,8 @@ import task6.businessobjects.LetterFactory;
 import task6.businessobjects.UserFactory;
 import task6.screens.MailRuEmailPage;
 import task6.screens.SendNewLetterPage;
-import task6.services.LoginService;
 import task6.services.LetterService;
+import task6.services.LoginService;
 import task6.tests.BaseTest;
 
 public class SendLetterWithoutSubjectTest extends BaseTest {

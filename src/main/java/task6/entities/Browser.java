@@ -8,22 +8,28 @@ import org.openqa.selenium.support.ui.*;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 public class Browser {
 
+    public static final int LONG_TIMEOUT = 20;
+    public static final int SHORT_TIMEOUT = 1;
+    public static final int POLLING_TIME = 1;
     private static WebDriver driver;
-    private static final int TIMEOUT = 20;
     private static Browser browser;
 
     private Browser() {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public static Browser getInstance() {
         if (browser == null) {
-            return new Browser();
-        } else return browser;
+            return browser = new Browser();
+        } else {
+            return browser;
+        }
     }
 
     public static void closeDriver() {
@@ -31,22 +37,10 @@ public class Browser {
         browser = null;
     }
 
-    public WebDriverWait waitUntil() {
-        return new WebDriverWait(driver, TIMEOUT);
-    }
-
-    public Wait fluentWaitUntil() {
-        Wait<WebDriver> fluentWait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(10))
-                .pollingEvery(Duration.ofSeconds(1))
-                .ignoring(StaleElementReferenceException.class, NoSuchElementException.class);
-        return fluentWait;
-    }
-
-
     public void openPage(String url) {
         System.out.println(String.format("Open page by URL: [%s]", url));
         driver.get(url);
+        driver.manage().window().maximize();
     }
 
     public void clickElement(By locator) {
@@ -65,13 +59,9 @@ public class Browser {
     }
 
     public boolean isDisplayed(By locator) {
+        waitForVisibility(locator, LONG_TIMEOUT);
         System.out.println(String.format("Check that element located [%s] is displayed", locator));
         return driver.findElement(locator).isDisplayed();
-    }
-
-    public void waitForVisibilityOf(By locator) {
-        System.out.println(String.format("Check that element located [%s] is visible", locator));
-        waitUntil().until(ExpectedConditions.visibilityOf(driver.findElement(locator)));
     }
 
     public WebElement findElementBy(By locator) {
@@ -91,6 +81,8 @@ public class Browser {
     }
 
     public void selectCheckbox(By locator) {
+        fluentWaitForClickable(locator, LONG_TIMEOUT);
+        System.out.println(String.format("Select checkbox from element located: [%s]", locator));
         Actions actions = new Actions(driver);
         actions
                 .moveToElement(driver.findElement(locator))
@@ -99,4 +91,33 @@ public class Browser {
                 .perform();
     }
 
+    public void waitForVisibility(By locator, int seconds) {
+        System.out.println(String.format("Check that element located [%s] is visible for [%s] seconds", locator, seconds));
+        new WebDriverWait(driver, seconds)
+                .until(ExpectedConditions.visibilityOf(driver.findElement(locator)));
+    }
+
+    public void fluentWaitForVisibility(By locator, int timeout) {
+        Wait<WebDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(timeout))
+                .pollingEvery(Duration.ofSeconds(POLLING_TIME))
+                .ignoring(StaleElementReferenceException.class, NoSuchElementException.class);
+        fluentWait.until(ExpectedConditions.visibilityOf(findElementBy(locator)));
+    }
+
+    public void fluentWaitForClickable(By locator, int timeout) {
+        Wait<WebDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(timeout))
+                .pollingEvery(Duration.ofSeconds(POLLING_TIME))
+                .ignoring(StaleElementReferenceException.class, NoSuchElementException.class);
+        fluentWait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public boolean isElementPresent(By locator) {
+        System.out.println(String.format("Check that element located [%s] is not present", locator));
+        driver.manage().timeouts().implicitlyWait(SHORT_TIMEOUT, TimeUnit.SECONDS);
+        boolean result = findElementsBy(locator).size() != 0;
+        driver.manage().timeouts().implicitlyWait(LONG_TIMEOUT, TimeUnit.SECONDS);
+        return result;
+    }
 }

@@ -10,7 +10,7 @@ public class TestRunner {
     public static void main(String[] args) {
         TestNG testNG = new TestNG();
         List<String> files = Arrays.asList(
-                "./src/main/resources/task6//testng.xml");
+                "./src/main/resources//testng.xml");
         testNG.setTestSuites(files);
         testNG.run();
     }

@@ -22,11 +22,6 @@ public class DeleteLetterFromDraftsAndTrashTest {
         LetterService.deleteLetterFromDraftsAndTrash();
     }
 
-    @AfterMethod
-    public static void deleteLetter() {
-        LetterService.deleteLetterFromDraftsAndTrash();
-    }
-
     @Test
     public void deleteLetterFromDraftsAndTrashTest() {
         Letter newLetter = LetterFactory.getCorrectLetter();
@@ -44,7 +39,7 @@ public class DeleteLetterFromDraftsAndTrashTest {
         mailRuEmailPage
                 .clickTrashLink()
                 .deleteLetter();
-        softAssert.assertFalse(mailRuEmailPage.isLetterNotPresent());
+        softAssert.assertFalse(mailRuEmailPage.isLetterPresent());
         softAssert.assertAll();
     }
 }

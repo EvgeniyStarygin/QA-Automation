@@ -1,8 +1,7 @@
 package task6.screens;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.By;
+import task6.entities.Browser;
 
 public class MailRuEmailPage extends BasePage {
 
@@ -10,6 +9,9 @@ public class MailRuEmailPage extends BasePage {
     private static final By NEW_LETTER_BUTTON_LOCATOR = By.xpath("//a[@title='Написать письмо']");
     private static final By CHECKBOX_FOR_ONE_LETTER_LOCATOR = By.xpath("//button[contains(@class, 'll-av')]");
     private static final By DELETE_LETTER_BUTTON_LOCATOR = By.xpath("//span[@title='Удалить']");
+    private static final By SELECT_ALL_BUTTON_LOCATOR = By.xpath("//span[@title='Выделить все']");
+    private static final By CLEAR_FOLDER_WINDOW_LOCATOR = By.xpath("//div[contains(@class, 'layer-confirm-folder-clear')]");
+    private static final By CLEAR_BUTTON_LOCATOR = By.xpath("//span[text()='Очистить']//parent::span[@class='button2__wrapper']");
     private static final By INBOX_LETTERS_LINK_LOCATOR = By.xpath("//a[@data-title='Входящие'] | //a[@title='Входящие']");
     private static final By SENT_LETTERS_LINK_LOCATOR = By.xpath("//a[@data-title='Отправленные'] | //a[@title='Отправленные']");
     private static final By DRAFTS_LINK_LOCATOR = By.xpath("//a[@data-title='Черновики'] | //a[@title='Черновики']");
@@ -18,7 +20,7 @@ public class MailRuEmailPage extends BasePage {
 
 
     public MailRuEmailPage clickLetterLink() {
-        //fluentWait(By.xpath(LETTER_LINK_XPATH));
+        browser.fluentWaitForVisibility(LETTER_LINK_LOCATOR, Browser.LONG_TIMEOUT);
         browser.clickElement(LETTER_LINK_LOCATOR);
         return this;
     }
@@ -28,29 +30,37 @@ public class MailRuEmailPage extends BasePage {
         return new SendNewLetterPage();
     }
 
+    public MailRuEmailPage clickSelectAllLettersButton() {
+        browser.clickElement(SELECT_ALL_BUTTON_LOCATOR);
+        return this;
+    }
+
+    public boolean isClearFolderWindowPresent() {
+        return browser.isElementPresent(CLEAR_FOLDER_WINDOW_LOCATOR);
+    }
+
+    public MailRuEmailPage clickClearButton() {
+        browser.clickElement(CLEAR_BUTTON_LOCATOR);
+        return this;
+    }
+
     public String getLetterSubject() {
-        browser.waitUntil().until(ExpectedConditions.visibilityOf(browser.findElementBy(By.xpath("//h2"))));
         return browser.getTextFrom(By.xpath("//h2"));
     }
 
     public String getLetterText() {
-        browser.waitUntil().until(ExpectedConditions.visibilityOf(browser.findElementBy(By.xpath("//div[contains(@id, 'BODY')]/div/div[1]"))));
         return browser.getTextFrom(By.xpath("//div[contains(@id, 'BODY')]/div/div[1]"));
     }
 
-    public boolean isLetterPresent() {
-        if (browser.findElementsBy(LETTER_LINK_LOCATOR).size() == 0) return false;
-        else return true;
-    }
-
     public MailRuEmailPage deleteLetter() {
-        if (isLetterPresent()) {
+        if (browser.isElementPresent(LETTER_LINK_LOCATOR)) {
             selectCheckboxForOneLetter();
+            clickSelectAllLettersButton();
             clickDeleteLetterButton();
+            if (isClearFolderWindowPresent()) clickClearButton();
         }
         return this;
     }
-
 
     public MailRuEmailPage clickInboxLettersLink() {
         browser.clickElement(INBOX_LETTERS_LINK_LOCATOR);
@@ -73,8 +83,12 @@ public class MailRuEmailPage extends BasePage {
     }
 
     public String getUserId() {
-        browser.waitForVisibilityOf(USER_ID_LOCATOR);
-        return browser.getTextFrom(USER_ID_LOCATOR);
+        browser.fluentWaitForClickable(USER_ID_LOCATOR, Browser.LONG_TIMEOUT);
+        return browser.findElementBy(USER_ID_LOCATOR).getText();
+    }
+
+    public boolean isLetterPresent() {
+        return browser.isElementPresent(LETTER_LINK_LOCATOR);
     }
 
     public void clickDeleteLetterButton() {

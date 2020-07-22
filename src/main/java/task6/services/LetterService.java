@@ -9,7 +9,7 @@ public class LetterService {
     private static MailRuEmailPage mailRuEmailPage;
     private static SendNewLetterPage sendNewLetterPage;
 
-    public static SendNewLetterPage openNewLetterPage() {
+    public static SendNewLetterPage openNewLetterPage()  {
         mailRuEmailPage = new MailRuEmailPage();
         mailRuEmailPage.clickNewLetterButton();
         return new SendNewLetterPage();

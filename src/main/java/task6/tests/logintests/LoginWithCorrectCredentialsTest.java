@@ -13,11 +13,11 @@ import static org.testng.Assert.assertEquals;
 public class LoginWithCorrectCredentialsTest extends BaseTest {
 
     @Test
-    public void loginWithCorrectCredentialsTest()  {
+    public void loginWithCorrectCredentialsTest() {
         User user = UserFactory.getUserWithCorrectCredentials();
         Email email = user.getEmail();
         LoginService.logIn(user);
         MailRuEmailPage mailRuEmailPage = new MailRuEmailPage();
-        assertEquals(mailRuEmailPage.getUserId(), email.getLogin() + email.getDomain());
+        assertEquals(mailRuEmailPage.getUserId(), email.getLogin() + email.getDomain(), "Unexpected user ID");
     }
 }
