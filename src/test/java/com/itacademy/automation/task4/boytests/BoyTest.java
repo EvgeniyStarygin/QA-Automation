@@ -3,12 +3,12 @@ package com.itacademy.automation.task4.boytests;
 import com.itacademy.automation.task4.Boy;
 import com.itacademy.automation.task4.Girl;
 import com.itacademy.automation.task4.Mood;
-import com.itacademy.automation.task4helpers.exceptions.BirthdayIsNullException;
-import com.itacademy.automation.task4helpers.exceptions.NegativeWealthException;
+import com.itacademy.automation.task4.helpers.exceptions.BirthdayIsNullException;
+import com.itacademy.automation.task4.helpers.exceptions.NegativeWealthException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.itacademy.automation.task4helpers.random.RandomGenerator.*;
+import static com.itacademy.automation.task4.helpers.random.RandomGenerator.*;
 import static org.testng.Assert.assertEquals;
 
 public class BoyTest {

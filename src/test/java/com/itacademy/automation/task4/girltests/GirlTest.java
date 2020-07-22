@@ -3,11 +3,11 @@ package com.itacademy.automation.task4.girltests;
 import com.itacademy.automation.task4.Boy;
 import com.itacademy.automation.task4.Girl;
 import com.itacademy.automation.task4.Mood;
-import com.itacademy.automation.task4helpers.exceptions.BoyfriendIsNullException;
+import com.itacademy.automation.task4.helpers.exceptions.BoyfriendIsNullException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.itacademy.automation.task4helpers.random.RandomGenerator.*;
+import static com.itacademy.automation.task4.helpers.random.RandomGenerator.*;
 import static org.testng.Assert.assertEquals;
 
 public class GirlTest {

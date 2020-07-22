@@ -1,4 +1,4 @@
-package com.itacademy.automation.task4helpers.random;
+package com.itacademy.automation.task4.helpers.random;
 
 import org.decimal4j.util.DoubleRounder;
 

@@ -1,6 +1,6 @@
 package com.itacademy.automation.task4;
 
-import com.itacademy.automation.task4helpers.exceptions.BoyfriendIsNullException;
+import com.itacademy.automation.task4.helpers.exceptions.BoyfriendIsNullException;
 import lombok.Getter;
 import lombok.Setter;
 
