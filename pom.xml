@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cam.epam.unit_testing</groupId>
-    <artifactId>cam.epam.unit_testing.core</artifactId>
+    <groupId>by.itacademy</groupId>
+    <artifactId>testframework</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
@@ -13,21 +13,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-<<<<<<< HEAD
                     <source>8</source>
                     <target>8</target>
-=======
-                    <source>1.8</source>
-                    <target>1.8</target>
->>>>>>> TASK-4
                 </configuration>
             </plugin>
         </plugins>
     </build>
-<<<<<<< HEAD
 
-
-=======
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
@@ -46,5 +38,4 @@
             <version>1.0.3</version>
         </dependency>
     </dependencies>
->>>>>>> TASK-4
 </project>
