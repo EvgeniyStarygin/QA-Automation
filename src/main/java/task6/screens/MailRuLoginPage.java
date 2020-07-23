@@ -3,7 +3,7 @@ package task6.screens;
 import org.openqa.selenium.By;
 import task6.entities.Browser;
 
-public class MailRuMainPage extends BasePage {
+public class MailRuLoginPage extends BasePage {
 
     private static final String URL = "https://mail.ru";
 
@@ -15,29 +15,24 @@ public class MailRuMainPage extends BasePage {
     private static final By LOGIN_BUTTON_LOCATOR = By.xpath("//label[@id='mailbox:submit']//input[@type='submit']");
     private static final By CLOUD_ICON_LOCATOR = By.xpath("//a[@title='Облако']");
 
-    public MailRuMainPage openPage() {
+    public MailRuLoginPage openMailRuMainPage() {
         browser.openPage(URL);
         return this;
     }
 
-    public MailRuMainPage typeLogin(String login) {
+    public MailRuLoginPage typeLogin(String login) {
         browser.typeTo(LOGIN_INPUT_LOCATOR, login);
         return this;
     }
 
-    public MailRuMainPage selectDomain(String domain) {
+    public MailRuLoginPage selectDomain(String domain) {
         browser.selectFrom(DOMAIN_SELECTOR_LOCATOR, domain);
         return this;
     }
 
-    public MailRuMainPage clickTypePasswordButton() {
+    public MailRuLoginPage clickTypePasswordButton() {
         browser.clickElement(TYPE_PASSWORD_BUTTON_LOCATOR);
         return this;
-    }
-
-    public CloudMainPage clickCloudIcon() {
-        browser.clickElement(CLOUD_ICON_LOCATOR);
-        return new CloudMainPage();
     }
 
     public boolean isErrorMassageDisplayed() {
@@ -50,7 +45,7 @@ public class MailRuMainPage extends BasePage {
         return browser.getTextFrom(ERROR_MESSAGE_LOCATOR);
     }
 
-    public MailRuMainPage typePassword(String password) {
+    public MailRuLoginPage typePassword(String password) {
         browser.typeTo(PASSWORD_INPUT_LOCATOR, password);
         return this;
     }

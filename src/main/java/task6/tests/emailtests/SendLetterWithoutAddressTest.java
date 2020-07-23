@@ -16,7 +16,7 @@ public class SendLetterWithoutAddressTest extends BaseTest {
 
     @BeforeMethod
     public void logIn() {
-        LoginService.logIn(UserFactory.getUserWithCorrectCredentials());
+        LoginService.loginToMail(UserFactory.getUserWithCorrectCredentials());
     }
 
     @Test

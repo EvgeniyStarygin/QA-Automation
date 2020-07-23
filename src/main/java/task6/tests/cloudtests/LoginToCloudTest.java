@@ -1,23 +1,24 @@
 package task6.tests.cloudtests;
 
+import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 import task6.businessobjects.Email;
 import task6.businessobjects.User;
 import task6.businessobjects.UserFactory;
-import task6.screens.MailRuEmailPage;
-import task6.screens.MailRuMainPage;
+import task6.screens.CloudMainPage;
 import task6.services.LoginService;
 import task6.tests.BaseTest;
 
-import static org.testng.Assert.assertEquals;
+public class LoginToCloudTest extends BaseTest {
 
-public class LoginToCloudTest {
+    private static CloudMainPage cloudMainPage;
 
     @Test
     public void loginToCloudTest() {
-        MailRuMainPage mailRuMainPage = new MailRuMainPage();
-        mailRuMainPage.openPage();
-        mailRuMainPage.clickCloudIcon();
-
+        User user = UserFactory.getUserWithCorrectCredentials();
+        Email email = user.getEmail();
+        LoginService.loginToCloud(user);
+        cloudMainPage = new CloudMainPage();
+        assertEquals(cloudMainPage.getUserId(), email.getLogin() + email.getDomain(), "Unexpected user ID");
     }
 }

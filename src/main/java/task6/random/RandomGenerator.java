@@ -28,4 +28,8 @@ public class RandomGenerator {
     public static String generateRandomLetterText() {
         return "Text " + System.currentTimeMillis();
     }
+
+    public static String generateRandomFolderName() {
+        return "Folder " + System.currentTimeMillis();
+    }
 }

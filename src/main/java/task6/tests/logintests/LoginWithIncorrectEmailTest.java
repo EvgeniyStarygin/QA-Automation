@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import task6.businessobjects.Email;
 import task6.businessobjects.EmailFactory;
-import task6.screens.MailRuMainPage;
+import task6.screens.MailRuLoginPage;
 import task6.services.LoginService;
 import task6.tests.BaseTest;
 
@@ -23,10 +23,10 @@ public class LoginWithIncorrectEmailTest extends BaseTest {
     @Test(dataProvider = "loginWithIncorrectEmailTest")
     public void loginWithIncorrectEmailTest(Email email, String expectedErrorMessage) {
         LoginService.enterEmail(email);
-        MailRuMainPage mailRuMainPage = new MailRuMainPage();
+        MailRuLoginPage mailRuLoginPage = new MailRuLoginPage();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(mailRuMainPage.isErrorMassageDisplayed(), "Error message is not displayed");
-        softAssert.assertEquals(mailRuMainPage.getErrorMessageText(), expectedErrorMessage, "Unexpected error message when login with incorrect email");
+        softAssert.assertTrue(mailRuLoginPage.isErrorMassageDisplayed(), "Error message is not displayed");
+        softAssert.assertEquals(mailRuLoginPage.getErrorMessageText(), expectedErrorMessage, "Unexpected error message when login with incorrect email");
         softAssert.assertAll();
     }
 }

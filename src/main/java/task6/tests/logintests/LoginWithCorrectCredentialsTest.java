@@ -16,7 +16,7 @@ public class LoginWithCorrectCredentialsTest extends BaseTest {
     public void loginWithCorrectCredentialsTest() {
         User user = UserFactory.getUserWithCorrectCredentials();
         Email email = user.getEmail();
-        LoginService.logIn(user);
+        LoginService.loginToMail(user);
         MailRuEmailPage mailRuEmailPage = new MailRuEmailPage();
         assertEquals(mailRuEmailPage.getUserId(), email.getLogin() + email.getDomain(), "Unexpected user ID");
     }

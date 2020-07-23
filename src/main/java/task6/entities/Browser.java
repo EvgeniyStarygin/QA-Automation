@@ -4,9 +4,12 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
+import task6.screens.CloudLoginPage;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
@@ -119,5 +122,30 @@ public class Browser {
         boolean result = findElementsBy(locator).size() != 0;
         driver.manage().timeouts().implicitlyWait(LONG_TIMEOUT, TimeUnit.SECONDS);
         return result;
+    }
+
+    public void switchToLastTab() {
+        System.out.println(String.format("Switch to last opened tab"));
+        ArrayList<String> tabs = new ArrayList(getAllTabsNames());
+        driver.switchTo().window(tabs.get(tabs.size() - 1));
+    }
+
+    public Set<String> getAllTabsNames(){
+        return driver.getWindowHandles();
+    }
+
+
+    public void switchToFrame(WebElement element){
+        driver.switchTo().frame(element);
+        System.out.println(String.format("Switched to frame [%s]", element));
+    }
+
+    public void switchToTab(String tabName){
+        driver.switchTo().window(tabName);
+        System.out.println(String.format("Switched to tab [%s]", tabName));
+    }
+
+    public String getTabName() {
+        return driver.getWindowHandle();
     }
 }

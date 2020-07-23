@@ -19,7 +19,7 @@ public class SendCorrectLetterTest extends BaseTest {
 
     @BeforeMethod
     public void deleteLetterIfPresent() {
-        LoginService.logIn(UserFactory.getUserWithCorrectCredentials());
+        LoginService.loginToMail(UserFactory.getUserWithCorrectCredentials());
         LetterService.deleteLetterFromInboxAndSent();
     }
 

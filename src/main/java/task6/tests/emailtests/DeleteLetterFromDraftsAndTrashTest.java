@@ -1,6 +1,5 @@
 package task6.tests.emailtests;
 
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -18,7 +17,7 @@ public class DeleteLetterFromDraftsAndTrashTest {
 
     @BeforeMethod
     public void deleteLetterIfPresent() {
-        LoginService.logIn(UserFactory.getUserWithCorrectCredentials());
+        LoginService.loginToMail(UserFactory.getUserWithCorrectCredentials());
         LetterService.deleteLetterFromDraftsAndTrash();
     }
 
