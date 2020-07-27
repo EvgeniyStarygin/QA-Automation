@@ -1,7 +1,8 @@
-package com.itacademy.automation.api.allinone;
+package com.itacademy.automation.api.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.itacademy.automation.api.businessobjects.Weather;
 
 import java.util.List;
 

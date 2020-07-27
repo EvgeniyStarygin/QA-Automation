@@ -1,9 +1,8 @@
-package com.itacademy.automation.api.allinone;
+package com.itacademy.automation.api.requests;
 
-import com.itacademy.automation.api.BaseConfiguration;
 import io.restassured.response.Response;
 
-public class AllInOneByGeoLocationRequest {
+public class AllInOneByGeoLocationRequest extends BaseRequest{
 
     private String parameters = "onecall?";
 
@@ -22,12 +21,12 @@ public class AllInOneByGeoLocationRequest {
     }
 
     public AllInOneByGeoLocationRequest withAppid() {
-        parameters += "&appid=" + BaseConfiguration.getUserId();
+        parameters += APPID;
         return this;
     }
 
     public Response doRequest() {
-        return BaseConfiguration.doRequest(parameters);
+        return doBaseRequest(parameters);
     }
 
     public enum Excludes {

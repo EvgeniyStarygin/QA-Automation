@@ -1,9 +1,8 @@
-package com.itacademy.automation.api.citybycoordinates;
+package com.itacademy.automation.api.requests;
 
-import com.itacademy.automation.api.BaseConfiguration;
 import io.restassured.response.Response;
 
-public class CityByCoordinatesRequest {
+public class CityByCoordinatesRequest extends BaseRequest{
 
     private String parameters = "weather?";
 
@@ -12,11 +11,11 @@ public class CityByCoordinatesRequest {
     }
 
     public CityByCoordinatesRequest withAppid() {
-        parameters += "&appid=" + BaseConfiguration.getUserId();
+        parameters += APPID;
         return this;
     }
 
     public Response doRequest() {
-        return BaseConfiguration.doRequest(parameters);
+        return doBaseRequest(parameters);
     }
 }

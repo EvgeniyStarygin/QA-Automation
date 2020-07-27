@@ -1,7 +1,7 @@
 package com.itacademy.automation.apitests;
 
-import com.itacademy.automation.api.currentweather.CurrentWeatherRequest;
-import com.itacademy.automation.api.currentweather.CurrentWeatherResponse;
+import com.itacademy.automation.api.requests.CurrentWeatherRequest;
+import com.itacademy.automation.api.responses.CurrentWeatherResponse;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -28,7 +28,7 @@ public class CurrentGomelWeatherTest {
         softAssert.assertEquals(parsedResponse.getCityName(), testCityName, "Unexpected country name");
         softAssert.assertEquals(parsedResponse.getCoordinates().getLatitude(), testLat, "Unexpected latitude");
         softAssert.assertEquals(parsedResponse.getCoordinates().getLongitude(), testLon, "Unexpected longitude");
-        softAssert.assertNotEquals(parsedResponse.getWeathers().get(0), testWeather, "Unexpected weather");
+        softAssert.assertNotEquals(parsedResponse.getWeathers().get(0).getWeather(), testWeather, "Unexpected weather");
         softAssert.assertAll();
     }
 }

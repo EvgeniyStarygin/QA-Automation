@@ -1,6 +1,6 @@
 package com.itacademy.automation.apitests;
 
-import com.itacademy.automation.api.allinone.AllInOneByGeoLocationRequest;
+import com.itacademy.automation.api.requests.AllInOneByGeoLocationRequest;
 import io.restassured.response.Response;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;

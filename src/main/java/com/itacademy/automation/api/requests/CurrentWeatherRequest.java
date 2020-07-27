@@ -1,9 +1,8 @@
-package com.itacademy.automation.api.currentweather;
+package com.itacademy.automation.api.requests;
 
-import com.itacademy.automation.api.BaseConfiguration;
 import io.restassured.response.Response;
 
-public class CurrentWeatherRequest {
+public class CurrentWeatherRequest extends BaseRequest{
 
     private String parameters = "weather?";
 
@@ -12,11 +11,11 @@ public class CurrentWeatherRequest {
     }
 
     public CurrentWeatherRequest withAppid() {
-        parameters += "&appid=" + BaseConfiguration.getUserId();
+        parameters += APPID;
         return this;
     }
 
     public Response doRequest() {
-        return BaseConfiguration.doRequest(parameters);
+        return doBaseRequest(parameters);
     }
 }

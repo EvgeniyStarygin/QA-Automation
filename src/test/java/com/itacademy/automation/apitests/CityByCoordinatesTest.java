@@ -1,11 +1,11 @@
 package com.itacademy.automation.apitests;
 
-import com.itacademy.automation.api.citybycoordinates.CityByCoordinatesRequest;
-import com.itacademy.automation.api.currentweather.CurrentWeatherRequest;
-import com.itacademy.automation.api.currentweather.CurrentWeatherResponse;
+import com.itacademy.automation.api.requests.CityByCoordinatesRequest;
+import com.itacademy.automation.api.responses.CurrentWeatherResponse;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
+import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
 
 public class CityByCoordinatesTest {
@@ -22,6 +22,7 @@ public class CityByCoordinatesTest {
                 .withAppid()
                 .doRequest();
         parsedResponse = response.as(CurrentWeatherResponse.class);
-        assertEquals(parsedResponse.getCityName(), testCityName, String.format("Сity %s is not located in coordinates lat=%s, lon=%s.", testCityName, testLat, testLon));
+        assertEquals(parsedResponse.getCityName(), testCityName,
+                format("Сity %s is not located in coordinates lat=%s, lon=%s.", testCityName, testLat, testLon));
     }
 }

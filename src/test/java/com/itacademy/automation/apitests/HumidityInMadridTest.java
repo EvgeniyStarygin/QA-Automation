@@ -1,12 +1,13 @@
 package com.itacademy.automation.apitests;
 
-import com.itacademy.automation.api.allinone.AllInOneByGeoLocationRequest;
-import com.itacademy.automation.api.allinone.AllInOneByGeoLocationResponse;
-import com.itacademy.automation.api.allinone.ResponseHandler;
-import com.itacademy.automation.api.allinone.Weather;
+import com.itacademy.automation.api.requests.AllInOneByGeoLocationRequest;
+import com.itacademy.automation.api.responses.AllInOneByGeoLocationResponse;
+import com.itacademy.automation.api.services.HumidityService;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import static java.lang.String.format;
 
 public class HumidityInMadridTest {
 
@@ -24,11 +25,12 @@ public class HumidityInMadridTest {
                 .withAppid()
                 .doRequest();
         parsedResponse = response.as(AllInOneByGeoLocationResponse.class);
-        maxHumidity = ResponseHandler.findMaxHumidity(parsedResponse);
+        maxHumidity = HumidityService.findMaxHumidity(parsedResponse);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(parsedResponse.getTimezone(), testTimezone, "Country for checking is not Madrid");
-        softAssert.assertTrue(ResponseHandler.isMaxHumidityInFirstFiveDays(parsedResponse), "Max humidity not expected for five days");
-        softAssert.assertTrue(maxHumidity > percentageOfHumidity, String.format("Max humidity not more than %s", percentageOfHumidity));
+        softAssert.assertTrue(HumidityService.isMaxHumidityInFirstFiveDays(parsedResponse), "Max humidity not expected for five days");
+        softAssert.assertTrue(maxHumidity > percentageOfHumidity,
+                format("Max humidity not more than %s", percentageOfHumidity));
         softAssert.assertAll();
 
     }

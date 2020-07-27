@@ -1,4 +1,4 @@
-package com.itacademy.automation.api.currentweather;
+package com.itacademy.automation.api.businessobjects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CountryInformation {
 
     @JsonProperty("country")
-    public String countryCode;
+    private String countryCode;
 
     public String getCountryCode() {
         return countryCode;

@@ -1,6 +1,8 @@
-package com.itacademy.automation.api.allinone;
+package com.itacademy.automation.api.services;
 
-public class ResponseHandler {
+import com.itacademy.automation.api.responses.AllInOneByGeoLocationResponse;
+
+public class HumidityService {
 
     private static int maxHumidity;
     private static int currentHumidity;
