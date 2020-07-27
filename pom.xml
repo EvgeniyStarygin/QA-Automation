@@ -26,7 +26,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>task6.tests.TestRunner</mainClass>
+                            <mainClass>ui_task.tests.TestRunner</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
