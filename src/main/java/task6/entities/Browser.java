@@ -2,6 +2,7 @@ package task6.entities;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import task6.screens.CloudLoginPage;
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 public class Browser {
-
+    public static String browserType;
     public static final int LONG_TIMEOUT = 20;
     public static final int SHORT_TIMEOUT = 1;
     public static final int POLLING_TIME = 1;
@@ -22,9 +23,21 @@ public class Browser {
     private static Browser browser;
 
     private Browser() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        switch (browserType) {
+            case ("chrome"):
+                System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
+                driver = new ChromeDriver();
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                break;
+            case ("mozilla"):
+                System.setProperty("webdriver.chrome.driver", "./src/main/resources/geckodriver.exe");
+                driver = new FirefoxDriver();
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                break;
+            default:
+                throw new IllegalArgumentException("Incorrect type of browser");
+        }
+
     }
 
     public static Browser getInstance() {
@@ -130,17 +143,17 @@ public class Browser {
         driver.switchTo().window(tabs.get(tabs.size() - 1));
     }
 
-    public Set<String> getAllTabsNames(){
+    public Set<String> getAllTabsNames() {
         return driver.getWindowHandles();
     }
 
 
-    public void switchToFrame(WebElement element){
+    public void switchToFrame(WebElement element) {
         driver.switchTo().frame(element);
         System.out.println(String.format("Switched to frame [%s]", element));
     }
 
-    public void switchToTab(String tabName){
+    public void switchToTab(String tabName) {
         driver.switchTo().window(tabName);
         System.out.println(String.format("Switched to tab [%s]", tabName));
     }
