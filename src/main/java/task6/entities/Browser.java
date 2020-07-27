@@ -30,7 +30,7 @@ public class Browser {
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 break;
             case ("mozilla"):
-                System.setProperty("webdriver.chrome.driver", "./src/main/resources/geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", "./src/main/resources/geckodriver.exe");
                 driver = new FirefoxDriver();
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 break;
