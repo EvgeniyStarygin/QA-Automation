@@ -3,10 +3,10 @@
 <suite name="ApiTests">
     <test name="WeatherTests">
         <classes>
-            <class name="com.itacademy.automation.apitests.CityByCoordinatesTest"></class>
-            <class name="com.itacademy.automation.apitests.CurrentGomelWeatherTest"></class>
-            <class name="com.itacademy.automation.apitests.HumidityInMadridTest"></class>
-            <class name="com.itacademy.automation.apitests.RequestWithoutKeyTest"></class>
+            <class name="com.itacademy.automation.api_tests.CityByCoordinatesTest"></class>
+            <class name="com.itacademy.automation.api_tests.CurrentGomelWeatherTest"></class>
+            <class name="com.itacademy.automation.api_tests.HumidityInMadridTest"></class>
+            <class name="com.itacademy.automation.api_tests.RequestWithoutKeyTest"></class>
         </classes>
     </test>
 </suite>

@@ -1,4 +1,4 @@
-package com.itacademy.automation.api.businessobjects;
+package com.itacademy.automation.api.business_objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

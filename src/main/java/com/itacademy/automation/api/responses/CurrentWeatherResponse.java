@@ -2,9 +2,9 @@ package com.itacademy.automation.api.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.itacademy.automation.api.businessobjects.Coordinates;
-import com.itacademy.automation.api.businessobjects.CountryInformation;
-import com.itacademy.automation.api.businessobjects.Weather;
+import com.itacademy.automation.api.business_objects.Coordinates;
+import com.itacademy.automation.api.business_objects.CountryInformation;
+import com.itacademy.automation.api.business_objects.Weather;
 
 import java.util.List;
 

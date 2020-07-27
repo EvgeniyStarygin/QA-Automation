@@ -1,4 +1,4 @@
-package com.itacademy.automation.apitests;
+package com.itacademy.automation.api_tests;
 
 import com.itacademy.automation.api.requests.AllInOneByGeoLocationRequest;
 import io.restassured.response.Response;
