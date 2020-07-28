@@ -23,7 +23,10 @@ public class Browser {
     private static Browser browser;
 
     private Browser() {
-        switch (browserType) {
+        System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        /*switch (browserType) {
             case ("chrome"):
                 System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
                 driver = new ChromeDriver();
@@ -36,7 +39,7 @@ public class Browser {
                 break;
             default:
                 throw new IllegalArgumentException("Incorrect type of browser");
-        }
+        }*/
 
     }
 
