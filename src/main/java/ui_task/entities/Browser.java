@@ -21,12 +21,8 @@ public class Browser {
     private static Browser browser;
 
     private Browser() {
-
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/ui_task/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //browserType = System.getProperty("browser");
-        /*switch (browserType) {
+        browserType = System.getProperty("browser");
+        switch (browserType) {
             case ("chrome"):
                 System.setProperty("webdriver.chrome.driver", "./src/test/resources/ui_task/chromedriver.exe");
                 driver = new ChromeDriver();
@@ -39,7 +35,7 @@ public class Browser {
                 break;
             default:
                 throw new IllegalArgumentException("Incorrect type of browser");
-        }*/
+        }
     }
 
     public static Browser getInstance() {
