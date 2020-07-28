@@ -21,21 +21,25 @@ public class Browser {
     private static Browser browser;
 
     private Browser() {
-        browserType = System.getProperty("browser");
-        switch (browserType) {
+
+        System.setProperty("webdriver.chrome.driver", "./src/test/resources/ui_task/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //browserType = System.getProperty("browser");
+        /*switch (browserType) {
             case ("chrome"):
-                System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "./src/test/resources/ui_task/chromedriver.exe");
                 driver = new ChromeDriver();
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 break;
             case ("mozilla"):
-                System.setProperty("webdriver.gecko.driver", "./src/main/resources/geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", "./src/test/resources/ui_task/geckodriver.exe");
                 driver = new FirefoxDriver();
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 break;
             default:
                 throw new IllegalArgumentException("Incorrect type of browser");
-        }
+        }*/
     }
 
     public static Browser getInstance() {
