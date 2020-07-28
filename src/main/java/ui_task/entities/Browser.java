@@ -2,6 +2,7 @@ package ui_task.entities;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class Browser {
-
+    public static String browserType;
     public static final int LONG_TIMEOUT = 20;
     public static final int SHORT_TIMEOUT = 1;
     public static final int POLLING_TIME = 1;
@@ -20,9 +21,21 @@ public class Browser {
     private static Browser browser;
 
     private Browser() {
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/ui_task/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        browserType = System.getProperty("browser");
+        switch (browserType) {
+            case ("chrome"):
+                System.setProperty("webdriver.chrome.driver", "./src/main/resources/chromedriver.exe");
+                driver = new ChromeDriver();
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                break;
+            case ("mozilla"):
+                System.setProperty("webdriver.gecko.driver", "./src/main/resources/geckodriver.exe");
+                driver = new FirefoxDriver();
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                break;
+            default:
+                throw new IllegalArgumentException("Incorrect type of browser");
+        }
     }
 
     public static Browser getInstance() {
