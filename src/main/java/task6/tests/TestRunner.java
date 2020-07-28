@@ -18,7 +18,7 @@ public class TestRunner {
 
         TestNG testNG = new TestNG();
         List<String> files = Arrays.asList(
-                "./src/main/resources//testng.xml");
+                "./src/main/resources/testng.xml");
         testNG.setTestSuites(files);
         testNG.run();
     }
