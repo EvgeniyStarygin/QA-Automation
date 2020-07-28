@@ -10,11 +10,11 @@ public class TestRunner {
 
     public static void main(String[] args) {
 
-        /*for (int i = 0; i < args.length; i++) {
+        for (int i = 0; i < args.length; i++) {
             if (args[i].contains("--browser")) {
                 Browser.browserType = args[i].split("=")[1];
             }
-        }*/
+        }
 
         TestNG testNG = new TestNG();
         List<String> files = Arrays.asList(
