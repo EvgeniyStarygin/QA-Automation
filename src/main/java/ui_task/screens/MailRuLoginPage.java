@@ -36,12 +36,10 @@ public class MailRuLoginPage extends BasePage {
     }
 
     public boolean isErrorMassageDisplayed() {
-        browser.waitForVisibility(ERROR_MESSAGE_LOCATOR, Browser.LONG_TIMEOUT);
         return browser.isDisplayed(ERROR_MESSAGE_LOCATOR);
     }
 
     public String getErrorMessageText() {
-        browser.waitForVisibility(ERROR_MESSAGE_LOCATOR, Browser.LONG_TIMEOUT);
         return browser.getTextFrom(ERROR_MESSAGE_LOCATOR);
     }
 

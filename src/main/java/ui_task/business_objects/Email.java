@@ -21,4 +21,9 @@ public class Email {
         this.domain = domain;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "login-'" + login + '\'' + ", domain-'" + domain + '\'';
+    }
 }

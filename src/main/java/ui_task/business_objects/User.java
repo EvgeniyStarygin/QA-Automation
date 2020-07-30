@@ -24,4 +24,11 @@ public class User {
                 .withDomain(domain);
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "login-'" + email.getLogin() + '\''
+                + ", domain-'" + email.getDomain() + '\''
+                + ", password-'" + password + '\'';
+    }
 }

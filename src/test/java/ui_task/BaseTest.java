@@ -2,13 +2,12 @@ package ui_task;
 
 import org.testng.annotations.AfterClass;
 import ui_task.entities.Browser;
-import ui_task.loggers.MailRuLogger;
+import ui_task.loggers.CustomLogger;
 
 public class BaseTest {
 
     @AfterClass
-    public void tearDown() {
-        MailRuLogger.logInfo("Test finished");
+    public void closeDriver() {
         Browser.closeDriver();
     }
 }

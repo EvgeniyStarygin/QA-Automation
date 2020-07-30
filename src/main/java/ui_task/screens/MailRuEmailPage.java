@@ -20,7 +20,7 @@ public class MailRuEmailPage extends BasePage {
 
 
     public MailRuEmailPage clickLetterLink() {
-        browser.fluentWaitForVisibility(LETTER_LINK_LOCATOR, Browser.LONG_TIMEOUT);
+        browser.fluentWaitForClickable(LETTER_LINK_LOCATOR, Browser.LONG_TIMEOUT);
         browser.clickElement(LETTER_LINK_LOCATOR);
         return this;
     }
@@ -52,7 +52,7 @@ public class MailRuEmailPage extends BasePage {
         return browser.getTextFrom(By.xpath("//div[contains(@id, 'BODY')]/div/div[1]"));
     }
 
-    public MailRuEmailPage deleteLetter() {
+    public MailRuEmailPage deleteLettersIfExist() {
         if (browser.isElementPresent(LETTER_LINK_LOCATOR)) {
             selectCheckboxForOneLetter();
             clickSelectAllLettersButton();

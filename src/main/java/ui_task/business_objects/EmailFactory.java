@@ -1,6 +1,6 @@
 package ui_task.business_objects;
 
-import static ui_task.random.RandomGenerator.*;
+import static ui_task.services.RandomGenerator.*;
 
 public class EmailFactory {
 

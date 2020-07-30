@@ -8,31 +8,40 @@ import ui_task.BaseTest;
 import ui_task.business_objects.UserFactory;
 import ui_task.listeners.TestListener;
 import ui_task.screens.CloudMainPage;
+import ui_task.services.FileCreator;
 import ui_task.services.LoginService;
-import ui_task.services.RandomGenerator;
 
 import static org.testng.Assert.assertEquals;
 
 @Listeners({TestListener.class})
-public class CreateNewFolderTest extends BaseTest {
+public class UploadFileTest extends BaseTest {
 
     private static CloudMainPage cloudMainPage;
 
     @BeforeMethod
     public void setUp() {
         LoginService.loginToCloud(UserFactory.getUserWithCorrectCredentials());
-        cloudMainPage = new CloudMainPage().deleteFilesIfExist();
+        FileCreator.createTestFile();
+        cloudMainPage = new CloudMainPage();
+        cloudMainPage.deleteFilesIfExist();
     }
 
     @AfterMethod
     public void tearDown() {
         cloudMainPage.deleteFilesIfExist();
+        FileCreator.deleteTestFile();
     }
 
     @Test
-    public void createNewFolderTest() {
-        String folderName = RandomGenerator.generateRandomFolderName();
-        cloudMainPage.createNewFolder(folderName);
-        assertEquals(cloudMainPage.getNameOfTheCreatedEntity(), folderName, "Unexpected folder name");
+    public void uploadFileTest() {
+        cloudMainPage
+                .clickUploadButton()
+                .uploadNewFile(FileCreator.getFile().getAbsolutePath());
+        if (cloudMainPage.isFileUploaded()) {
+            cloudMainPage
+                    .closeUploadResultWindow()
+                    .clickMyFilesLink();
+        }
+        assertEquals(cloudMainPage.getNameOfTheCreatedEntity(), FileCreator.getFileName(), "Unexpected file name");
     }
 }

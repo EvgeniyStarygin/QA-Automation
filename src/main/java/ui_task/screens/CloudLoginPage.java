@@ -2,6 +2,8 @@ package ui_task.screens;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ui_task.entities.Browser;
+import ui_task.loggers.CustomLogger;
 
 import java.util.List;
 
@@ -31,20 +33,20 @@ public class CloudLoginPage extends BasePage {
     }
 
     public CloudLoginPage selectDomain(String domain) {
+        CustomLogger.logSelect(DOMAINS_LIST_LOCATOR, domain);
         browser.clickElement(DOMAIN_SELECTOR_LOCATOR);
         List<WebElement> domains = browser.findElementsBy(DOMAINS_LIST_LOCATOR);
         for (WebElement element : domains) {
             if (element.getAttribute("aria-label").equals(domain)) {
                 element.click();
-                System.out.println(String.format("Select [%s] from domains list", domain));
                 break;
             }
         }
         return this;
     }
 
-    public CloudLoginPage switchToLoginForm() {
-        browser.switchToFrame(browser.findElementBy(LOGIN_FRAME_LOCATOR));
+    public CloudLoginPage switchToLoginForm()  {
+        browser.switchToFrame(LOGIN_FRAME_LOCATOR);
         return this;
     }
 

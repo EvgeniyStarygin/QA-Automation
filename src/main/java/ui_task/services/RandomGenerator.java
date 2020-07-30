@@ -1,4 +1,4 @@
-package ui_task.random;
+package ui_task.services;
 
 import java.util.Random;
 
@@ -31,5 +31,13 @@ public class RandomGenerator {
 
     public static String generateRandomFolderName() {
         return "Folder " + System.currentTimeMillis();
+    }
+
+    public static String generateRandomFileName() {
+        return "File" + System.currentTimeMillis() + ".txt";
+    }
+
+    public static String generateRandomScreenshotName() {
+        return "Screenshot" + System.currentTimeMillis() + ".png";
     }
 }

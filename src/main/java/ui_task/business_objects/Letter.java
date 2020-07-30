@@ -33,4 +33,11 @@ public class Letter {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Letter: " +
+                "address-'" + address + '\'' +
+                ", subject-'" + subject + '\'' +
+                ", text-'" + text + '\'';
+    }
 }

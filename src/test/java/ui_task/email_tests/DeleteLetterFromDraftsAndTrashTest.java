@@ -1,22 +1,24 @@
 package ui_task.email_tests;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import ui_task.BaseTest;
 import ui_task.business_objects.Letter;
 import ui_task.business_objects.LetterFactory;
 import ui_task.business_objects.UserFactory;
+import ui_task.listeners.TestListener;
 import ui_task.screens.MailRuEmailPage;
 import ui_task.screens.SendNewLetterPage;
 import ui_task.services.LetterService;
 import ui_task.services.LoginService;
 
-public class DeleteLetterFromDraftsAndTrashTest {
-
-    private static MailRuEmailPage mailRuEmailPage;
+@Listeners({TestListener.class})
+public class DeleteLetterFromDraftsAndTrashTest extends BaseTest {
 
     @BeforeMethod
-    public void deleteLetterIfPresent() {
+    public void setUp() {
         LoginService.loginToMail(UserFactory.getUserWithCorrectCredentials());
         LetterService.deleteLetterFromDraftsAndTrash();
     }
@@ -24,12 +26,11 @@ public class DeleteLetterFromDraftsAndTrashTest {
     @Test
     public void deleteLetterFromDraftsAndTrashTest() {
         Letter newLetter = LetterFactory.getCorrectLetter();
-        SendNewLetterPage sendNewLetterPage = LetterService.openNewLetterPage();
         LetterService.saveNewLetter(newLetter);
-        mailRuEmailPage = sendNewLetterPage.closeNewLetterWindow();
+        MailRuEmailPage mailRuEmailPage = new SendNewLetterPage().closeNewLetterWindow();
         mailRuEmailPage
                 .clickDraftsLink()
-                .deleteLetter()
+                .deleteLettersIfExist()
                 .clickTrashLink()
                 .clickLetterLink();
         SoftAssert softAssert = new SoftAssert();
@@ -37,7 +38,7 @@ public class DeleteLetterFromDraftsAndTrashTest {
         softAssert.assertEquals(mailRuEmailPage.getLetterText(), newLetter.getText());
         mailRuEmailPage
                 .clickTrashLink()
-                .deleteLetter();
+                .deleteLettersIfExist();
         softAssert.assertFalse(mailRuEmailPage.isLetterPresent());
         softAssert.assertAll();
     }
