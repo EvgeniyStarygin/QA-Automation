@@ -22,7 +22,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        CustomLogger.logTestFailed(iTestResult);
+        CustomLogger.logTestFailed(iTestResult.getThrowable());
         Browser.getInstance().takeScreenshot();
     }
 

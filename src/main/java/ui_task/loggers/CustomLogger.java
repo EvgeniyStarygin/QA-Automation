@@ -15,9 +15,8 @@ public class CustomLogger {
 
     private static Logger logger = Logger.getLogger("CustomLogger");
 
-    public static void logTestFailed(ITestResult testResult) {
-        logger.info("Test " + testResult.getName() + " - FAILED");
-        logger.error(testResult.getThrowable().getMessage());
+    public static void logTestFailed(Throwable throwable) {
+        logger.error(throwable.getMessage());
     }
 
     public static void logTestStarted(ITestResult testResult) {
