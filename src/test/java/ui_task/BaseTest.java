@@ -6,7 +6,7 @@ import ui_task.loggers.CustomLogger;
 
 public class BaseTest {
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void closeDriver() {
         Browser.closeDriver();
     }
