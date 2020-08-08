@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="BoyTests" parallel="tests" thread-count="4">
+    <listeners>
+        <listener class-name="com.itacademy.automation.unit_tests.listeners.TestListener"></listener>
+    </listeners>
+    <test name="isSummerMonthTest">
+        <classes>
+            <class name="com.itacademy.automation.unit_tests.boytests.IsSummerMonthTestFactory"></class>
+        </classes>
+    </test>
+    <test name="spendSomeMoneyTest">
+        <groups>
+            <run>
+                <include name="spendSomeMoneyTest"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.itacademy.automation.unit_tests.boytests.BoyTest"></class>
+        </classes>
+    </test>
+    <test name="constructorExceptionsTest">
+        <groups>
+            <run>
+                <include name="constructorExceptions"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.itacademy.automation.unit_tests.boytests.BoyTest"></class>
+        </classes>
+    </test>
+    <test name="otherTests">
+        <groups>
+            <run>
+                <exclude name="constructorExceptions"></exclude>
+                <exclude name="spendSomeMoneyTest"></exclude>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.itacademy.automation.unit_tests.boytests.BoyTest"></class>
+        </classes>
+    </test>
+
+</suite>
