@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ApiTests">
+    <test name="WeatherTests">
+        <classes>
+            <class name="com.itacademy.automation.api_tests.CityByCoordinatesTest"></class>
+            <class name="com.itacademy.automation.api_tests.CurrentGomelWeatherTest"></class>
+            <class name="com.itacademy.automation.api_tests.HumidityInMadridTest"></class>
+            <class name="com.itacademy.automation.api_tests.RequestWithoutKeyTest"></class>
+        </classes>
+    </test>
+</suite>
