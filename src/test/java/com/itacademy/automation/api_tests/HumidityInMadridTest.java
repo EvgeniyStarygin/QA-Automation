@@ -1,8 +1,8 @@
 package com.itacademy.automation.api_tests;
 
-import com.itacademy.automation.api.requests.AllInOneByGeoLocationRequest;
-import com.itacademy.automation.api.responses.AllInOneByGeoLocationResponse;
-import com.itacademy.automation.api.services.HumidityService;
+import com.itacademy.automation.api_task.requests.AllInOneByGeoLocationRequest;
+import com.itacademy.automation.api_task.responses.AllInOneByGeoLocationResponse;
+import com.itacademy.automation.api_task.services.HumidityService;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;

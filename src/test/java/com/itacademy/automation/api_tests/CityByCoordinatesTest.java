@@ -1,7 +1,7 @@
 package com.itacademy.automation.api_tests;
 
-import com.itacademy.automation.api.requests.CityByCoordinatesRequest;
-import com.itacademy.automation.api.responses.CurrentWeatherResponse;
+import com.itacademy.automation.api_task.requests.CityByCoordinatesRequest;
+import com.itacademy.automation.api_task.responses.CurrentWeatherResponse;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
