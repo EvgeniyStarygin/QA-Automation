@@ -3,7 +3,7 @@
 <suite name="MailRu Tests">
     <test name="LoginTests">
         <packages>
-            <package name="com.itacademy.automation.ui_task.login_tests"></package>
+            <package name="com.itacademy.automation.ui_tests.login_tests"></package>
         </packages>
     </test>
 </suite>

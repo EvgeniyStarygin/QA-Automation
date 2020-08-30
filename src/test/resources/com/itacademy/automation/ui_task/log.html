@@ -11,7 +11,7 @@ th {background: #336699; color: #FFFFFF; text-align: left;}
 </head>
 <body bgcolor="#FFFFFF" topmargin="6" leftmargin="6">
 <hr size="1" noshade>
-Log session start time Mon Aug 31 00:41:40 MSK 2020<br>
+Log session start time Mon Aug 31 01:10:38 MSK 2020<br>
 <br>
 <table cellspacing="0" cellpadding="4" border="1" bordercolor="#224466" width="100%">
 <tr>
@@ -25,13 +25,29 @@ Log session start time Mon Aug 31 00:41:40 MSK 2020<br>
 <tr>
 <td>0</td>
 <td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="CustomLogger category">CustomLogger</td>
+<td title="Message">Starting test: loginWithCorrectCredentialsTest</td>
+</tr>
+
+<tr>
+<td>22</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="CustomLogger category">CustomLogger</td>
+<td title="Message">Signing into Mailbox with User: [login-'itacademyselenium', domain-'@mail.ru', password-'6MHXZS/O']</td>
+</tr>
+
+<tr>
+<td>4387</td>
+<td title="main thread">main</td>
 <td title="Level"><font color="#339933">DEBUG</font></td>
 <td title="CustomLogger category">CustomLogger</td>
 <td title="Message">Open page by URL: [https://mail.ru]</td>
 </tr>
 
 <tr>
-<td>4394</td>
+<td>8856</td>
 <td title="main thread">main</td>
 <td title="Level"><font color="#339933">DEBUG</font></td>
 <td title="CustomLogger category">CustomLogger</td>
@@ -39,7 +55,7 @@ Log session start time Mon Aug 31 00:41:40 MSK 2020<br>
 </tr>
 
 <tr>
-<td>4587</td>
+<td>9067</td>
 <td title="main thread">main</td>
 <td title="Level"><font color="#339933">DEBUG</font></td>
 <td title="CustomLogger category">CustomLogger</td>
@@ -47,7 +63,7 @@ Log session start time Mon Aug 31 00:41:40 MSK 2020<br>
 </tr>
 
 <tr>
-<td>4686</td>
+<td>9157</td>
 <td title="main thread">main</td>
 <td title="Level"><font color="#339933">DEBUG</font></td>
 <td title="CustomLogger category">CustomLogger</td>
@@ -55,7 +71,7 @@ Log session start time Mon Aug 31 00:41:40 MSK 2020<br>
 </tr>
 
 <tr>
-<td>4833</td>
+<td>9328</td>
 <td title="main thread">main</td>
 <td title="Level"><font color="#339933">DEBUG</font></td>
 <td title="CustomLogger category">CustomLogger</td>
@@ -63,7 +79,7 @@ Log session start time Mon Aug 31 00:41:40 MSK 2020<br>
 </tr>
 
 <tr>
-<td>5132</td>
+<td>9663</td>
 <td title="main thread">main</td>
 <td title="Level"><font color="#339933">DEBUG</font></td>
 <td title="CustomLogger category">CustomLogger</td>
@@ -71,7 +87,7 @@ Log session start time Mon Aug 31 00:41:40 MSK 2020<br>
 </tr>
 
 <tr>
-<td>5241</td>
+<td>9780</td>
 <td title="main thread">main</td>
 <td title="Level"><font color="#339933">DEBUG</font></td>
 <td title="CustomLogger category">CustomLogger</td>
@@ -79,7 +95,7 @@ Log session start time Mon Aug 31 00:41:40 MSK 2020<br>
 </tr>
 
 <tr>
-<td>6526</td>
+<td>11237</td>
 <td title="main thread">main</td>
 <td title="Level"><font color="#339933">DEBUG</font></td>
 <td title="CustomLogger category">CustomLogger</td>
@@ -87,7 +103,15 @@ Log session start time Mon Aug 31 00:41:40 MSK 2020<br>
 </tr>
 
 <tr>
-<td>6546</td>
+<td>11266</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="CustomLogger category">CustomLogger</td>
+<td title="Message">Test loginWithCorrectCredentialsTest - PASSED</td>
+</tr>
+
+<tr>
+<td>11267</td>
 <td title="main thread">main</td>
 <td title="Level"><font color="#339933">DEBUG</font></td>
 <td title="CustomLogger category">CustomLogger</td>
@@ -95,9 +119,63 @@ Log session start time Mon Aug 31 00:41:40 MSK 2020<br>
 </tr>
 
 <tr>
-<td>10692</td>
+<td>12632</td>
 <td title="main thread">main</td>
-<td title="Level"><font color="#339933">DEBUG</font></td>
+<td title="Level">INFO</td>
 <td title="CustomLogger category">CustomLogger</td>
-<td title="Message">Open page by URL: [https://mail.ru]</td>
+<td title="Message">Starting test: loginWithIncorrectEmailTest</td>
+</tr>
+
+<tr>
+<td>12632</td>
+<td title="main thread">main</td>
+<td title="Level">INFO</td>
+<td title="CustomLogger category">CustomLogger</td>
+<td title="Message">Entering Email: [login-'!#$%^&amp;', domain-'@mail.ru']</td>
+</tr>
+
+<tr>
+<td>16104</td>
+<td title="main thread">main</td>
+<td title="Level"><font color="#993300"><strong>ERROR</strong></font></td>
+<td title="CustomLogger category">CustomLogger</td>
+<td title="Message">session not created
+from disconnected: received Inspector.detached event
+  (Session info: chrome=85.0.4183.83)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'LAPTOP-TG1T1KLO', ip: '192.168.100.4', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_211'
+Driver info: driver.version: ChromeDriver
+remote stacktrace: Backtrace:
+	Ordinal0 [0x009B87E3+2852835]
+	Ordinal0 [0x008A5BB1+1727409]
+	Ordinal0 [0x0077E4B9+517305]
+	Ordinal0 [0x00776959+485721]
+	Ordinal0 [0x0077656C+484716]
+	Ordinal0 [0x00775E98+482968]
+	Ordinal0 [0x007752D1+479953]
+	Ordinal0 [0x00775605+480773]
+	Ordinal0 [0x00783D0E+539918]
+	Ordinal0 [0x0078004C+524364]
+	Ordinal0 [0x0077FC75+523381]
+	Ordinal0 [0x007802B7+524983]
+	Ordinal0 [0x007804B0+525488]
+	Ordinal0 [0x0072E55F+189791]
+	Ordinal0 [0x0072D7FD+186365]
+	Ordinal0 [0x0072B70B+177931]
+	Ordinal0 [0x00712584+75140]
+	Ordinal0 [0x00713650+79440]
+	Ordinal0 [0x007135E9+79337]
+	Ordinal0 [0x008BAD5C+1813852]
+	GetHandleVerifier [0x00ADC616+1075574]
+	GetHandleVerifier [0x00ADC367+1074887]
+	GetHandleVerifier [0x00AE7497+1120247]
+	GetHandleVerifier [0x00ADCC16+1077110]
+	Ordinal0 [0x008B3206+1782278]
+	Ordinal0 [0x008BC3BB+1819579]
+	Ordinal0 [0x008BC523+1819939]
+	Ordinal0 [0x008D2B45+1911621]
+	BaseThreadInitThunk [0x777F6359+25]
+	RtlGetAppContainerNamedObjectPath [0x77A17C24+228]
+	RtlGetAppContainerNamedObjectPath [0x77A17BF4+180]
+</td>
 </tr>
