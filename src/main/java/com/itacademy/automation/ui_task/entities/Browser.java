@@ -1,14 +1,13 @@
 package com.itacademy.automation.ui_task.entities;
 
+import com.itacademy.automation.ui_task.loggers.CustomLogger;
+import com.itacademy.automation.ui_task.services.FileCreator;
+import com.itacademy.automation.ui_task.services.RandomGenerator;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
-import com.itacademy.automation.ui_task.loggers.CustomLogger;
-import com.itacademy.automation.ui_task.services.FileCreator;
-import com.itacademy.automation.ui_task.services.RandomGenerator;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -16,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import static java.lang.String.format;
 
 public class Browser {
 
