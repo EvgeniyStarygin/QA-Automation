@@ -159,4 +159,5 @@ public class CustomLogger {
     public static void logTakeScreenshot(File file) {
         logger.info(format("Take screenshot to the file [%s]", file.getAbsolutePath()));
     }
+
 }
