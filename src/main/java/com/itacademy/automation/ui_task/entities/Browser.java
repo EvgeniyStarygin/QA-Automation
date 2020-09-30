@@ -3,6 +3,7 @@ package com.itacademy.automation.ui_task.entities;
 import com.itacademy.automation.ui_task.loggers.CustomLogger;
 import com.itacademy.automation.ui_task.services.FileCreator;
 import com.itacademy.automation.ui_task.services.RandomGenerator;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -28,9 +29,10 @@ public class Browser {
     private static Browser browser;
 
     private Browser() {
-        System.setProperty("webdriver.chrome.driver", "./src/test/resources/com/itacademy/automation/ui_task/chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
         /*browserType = System.getProperty("browser");
         switch (browserType) {
             case ("chrome"):
@@ -65,7 +67,6 @@ public class Browser {
     public void openPage(String url) {
         CustomLogger.logOpenPage(url);
         driver.get(url);
-        driver.manage().window().maximize();
     }
 
     public void clickElement(By locator) {
